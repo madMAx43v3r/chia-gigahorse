@@ -25,17 +25,17 @@ When the fee is paid from a block, you will see a log entry like this:
 ```
 It will show the block height as well as the average fee that applies, depending on if the proof was computed via CPU or GPU.
 
-## GPU CUDA Plotter
+## Gigahorse GPU Plotter
 
-You can find the GPU plotter binaries for Nvidia GPUs in [cuda-plotter](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/cuda-plotter).
+You can find the GPU plotter binaries in [cuda-plotter](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/cuda-plotter).
 
-It supports plotting for Chia as well as MMX.
+They support plotting for Chia as well as MMX.
 
 ## CPU Plotter
 
 You can find the CPU plotter binaries in [cpu-plotter](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/cpu-plotter).
 
-It supports plotting for Chia as well as MMX.
+They support plotting for Chia as well as MMX.
 
 ## Farming Benchmark
 
