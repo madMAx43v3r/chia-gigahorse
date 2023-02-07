@@ -56,3 +56,8 @@ They support plotting for Chia as well as MMX.
 
 To test how many plots you can farm on a given system you can use the `ProofOfSpace` tool in [chiapos](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/chiapos).
 
+## Plot Sink
+
+Plot Sink is a tool to receive plots over the network and copy them to multiple HDDs in parallel.
+
+See open source repository: https://github.com/madMAx43v3r/chia-plot-sink.git
