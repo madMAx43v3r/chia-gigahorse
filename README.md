@@ -6,6 +6,10 @@ Since Chia still has a plot filter of 512 until some time in 2024, the farming c
 
 MMX testnet10 and mainnet will have a plot filter of 256.
 
+### RAM / VRAM requirements to farm
+
+TODO
+
 ## Chia Gigahorse Node / Farmer / Harvester
 
 In the [release](https://github.com/madMAx43v3r/chia-gigahorse/releases) section you can find Chia Blockchain binaries to farm compressed plots created with the new plotters provided in this repository.
