@@ -25,6 +25,21 @@ full_node: WARNING  Used farmer reward of block 2187769 as dev fee (3.125 % on a
 ```
 It will show the block height as well as the average fee that applies, depending on if the proof was computed via CPU or GPU.
 
+### Usage
+
+Using the Gigahorse binaries is pretty much the same as with a normal Chia installation:
+```
+cd chia-gigahorse-farmer
+. ./activate.sh
+chia start farmer
+```
+
+Make sure to close any other instances first:
+```
+chia stop all -d
+```
+Otherwise the `chia ...` commands will use the old version that is already running.
+
 ## Gigahorse GPU Plotter
 
 You can find the GPU plotter binaries in [cuda-plotter](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/cuda-plotter).
