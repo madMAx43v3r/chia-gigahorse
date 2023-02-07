@@ -21,7 +21,7 @@ When you find a block there's a chance the farmer reward is used as fee, this is
 
 When the fee is paid from a block, you will see a log entry like this:
 ```
-2023-02-07T23:21:15.579 full_node chia.full_node.full_node: WARNING  Used farmer reward of block 2187769 as dev fee (3.125 % on average)
+full_node: WARNING  Used farmer reward of block 2187769 as dev fee (3.125 % on average)
 ```
 It will show the block height as well as the average fee that applies, depending on if the proof was computed via CPU or GPU.
 
