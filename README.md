@@ -2,7 +2,9 @@
 
 ![image](https://user-images.githubusercontent.com/951738/217385873-20d85d4e-2a1e-4d84-be6b-87483b9f3e6b.png)
 
-Since Chia will still have a plot filter 512 until some time in 2024, the farming capacity is twice that until then.
+Since Chia still has a plot filter of 512 until some time in 2024, the farming capacity is twice that until then.
+
+MMX testnet10 and mainnet will have a plot filter of 256.
 
 ## Chia Gigahorse Node / Farmer / Harvester
 
