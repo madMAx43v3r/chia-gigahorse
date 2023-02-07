@@ -1,6 +1,6 @@
 ## Gigahorse Compressed Plots
 
-![image](https://user-images.githubusercontent.com/951738/217385873-20d85d4e-2a1e-4d84-be6b-87483b9f3e6b.png)
+![image](https://user-images.githubusercontent.com/951738/217386439-751908c7-f1b3-4c4e-9c7a-073d9c9fa721.png)
 
 Since Chia still has a plot filter of 512 until some time in 2024, the farming capacity is twice that until then.
 
