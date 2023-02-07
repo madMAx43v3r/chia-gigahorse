@@ -52,13 +52,13 @@ All that's needed is a `-t` drive to cache the plots for final copy.
 
 Example with full RAM mode and remote copy:
 ```
-cuda_plot_kxx -x 11337 -n -1 -C 7 -t /mnt/ssd/ -d @REMOTE_HOST -p <pool_key> -f <farmer_key>
+cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -d @REMOTE_HOST -p <pool_key> -f <farmer_key>
 ```
 `REMOTE_HOST` can be a host name or IP address, the `@` prefix is needed to signal remote copy mode.
 
 Example with full RAM mode and local destination:
 ```
-cuda_plot_kxx -x 11337 -n -1 -C 7 -t /mnt/ssd/ -d /mnt/hdd1/ -d /mnt/hdd2/ -p <pool_key> -f <farmer_key>
+cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -d /mnt/hdd1/ -d /mnt/hdd2/ -p <pool_key> -f <farmer_key>
 ```
 
 ### Partial RAM mode (SSD for `-2`)
@@ -67,13 +67,13 @@ To enable partial RAM mode, specify an SSD drive for `-2`.
 
 Example with partial RAM mode and remote copy:
 ```
-cuda_plot_kxx -x 11337 -n -1 -C 7 -t /mnt/ssd/ -2 /mnt/fast_ssd/ -d @REMOTE_HOST -p <pool_key> -f <farmer_key>
+cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -2 /mnt/fast_ssd/ -d @REMOTE_HOST -p <pool_key> -f <farmer_key>
 ```
 `REMOTE_HOST` can be a host name or IP address, the `@` prefix is needed to signal remote copy mode.
 
 Example with partial RAM mode and local destination:
 ```
-cuda_plot_kxx -x 11337 -n -1 -C 7 -t /mnt/slow_ssd/ -2 /mnt/fast_ssd/ -d /mnt/hdd1/ -d /mnt/hdd2/ -p <pool_key> -f <farmer_key>
+cuda_plot_kxx -n -1 -C 7 -t /mnt/slow_ssd/ -2 /mnt/fast_ssd/ -d /mnt/hdd1/ -d /mnt/hdd2/ -p <pool_key> -f <farmer_key>
 ```
 
 `tmpdir2` requires around 150G - 180G of free space for k32, depending on compression level.
@@ -151,10 +151,6 @@ numactl -N 0 --preferred=0 ./cuda_plot_k32 ...
 My test machine is a HP Z420 workstation with a single Xeon E5-2695 v2, 256G (8x32G) of DDR3-1600 memory, 1 TB Samsung 970 PRO SSD, 10G fiber NIC and a RTX 3060 Ti.
 It only cost around $1500 to build.
 
-Plotting time for k32 and full RAM mode is ~190 sec, or ~170 sec for level 7+ (`-D` enabled).
-Plotting time for k32 and partial RAM mode is ~280 sec, or ~250 sec for level 7+, using a 1 TB Samsung 970 PRO for `tmpdir` and `tmpdir2` (`-D` enabled, half the RAM filled with zeros).
-Plotting time for k32 and partial RAM mode with two SSDs is ~270 sec, or ~230 sec for level 7+,
-using a 1 TB Samsung 970 PRO for `tmpdir2` and a 1 TB Sabrent Rocket 4.0 for `tmpdir` (`-D` enabled, limited to PCIe 3.0, half the RAM filled with zeros).
-
-
+Plotting time for k32 and full RAM mode is ~175 sec, or ~155 sec for level 7+.
+Plotting time for k32 and partial RAM mode is ~280 sec, or ~250 sec for level 7+, using a 1 TB Samsung 970 PRO for `tmpdir` and `tmpdir2` (half the RAM filled with zeros).
 
