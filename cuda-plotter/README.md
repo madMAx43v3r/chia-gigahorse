@@ -78,6 +78,22 @@ cuda_plot_kxx -n -1 -C 7 -t /mnt/slow_ssd/ -2 /mnt/fast_ssd/ -d /mnt/hdd1/ -d /m
 
 `tmpdir2` requires around 150G - 180G of free space for k32, depending on compression level.
 
+### Multiple Destinations
+
+Multiple destinations can be specified by repeating `-d`:
+```
+cuda_plot_kxx -d /mnt/hdd0/ -d /mnt/hdd1/ -d /mnt/hdd2 ...
+```
+The same can be done with remote destinations:
+```
+cuda_plot_kxx -d @HOST0 -d @HOST1 -d @HOST2 ...
+```
+It's also possible to mix local HDDs and remote destinations.
+
+At most one copy is done per HDD, while remote destinations are load-balanced.
+
+It's possible to unmount and remount new drives onto the same mount points, the plotter will automatically recover and resume operation.
+
 ### Multi-GPU
 
 To plot with multiple GPUs the `-r` flag is used, for example to plot with the first two GPUs:
