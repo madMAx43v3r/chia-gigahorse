@@ -1,4 +1,4 @@
-# MMX chiapos
+# ProofOfSpace
 
 Use `-r 8` to get optimal performance, this will run `check` and `lookup` in parallel using 8 threads.
 
