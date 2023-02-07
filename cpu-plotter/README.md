@@ -1,6 +1,7 @@
 # chia-plotter (pipelined multi-threaded)
 
 This version creates v2.4 compressed plots, with compression level `-C` from 1 to 9.
+
 Both Chia and MMX are supported. The respective binary node / harvester are needed to farm these plots.
 
 Remote copy to a plot sink is now supported via `-d @hostname`.
