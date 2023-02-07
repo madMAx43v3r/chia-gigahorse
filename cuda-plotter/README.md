@@ -78,8 +78,26 @@ cuda_plot_kxx -n -1 -C 7 -t /mnt/slow_ssd/ -2 /mnt/fast_ssd/ -d /mnt/hdd1/ -d /m
 
 `tmpdir2` requires around 150G - 180G of free space for k32, depending on compression level.
 
+### Multi-GPU
+
+To plot with multiple GPUs the `-r` flag is used, for example to plot with the first two GPUs:
+```
+cuda_plot_kxx -r 2 ...
+```
+Or to plot with GPU 1 and 2 (ie. second and third)
+```
+cuda_plot_kxx -g 1 -r 2 ...
+```
+In multi-GPU mode `-g` is an offset to the first GPU to use.
+
+The work is divided evenly between GPUs, so ideally they should be equally fast. Only a power of two is supported, ie. 2, 4, 8 GPUs, etc.
+
+### Pausing behavior
+
 The plotter will automatically pause (and resume) plotting if `tmpdir` is running out of space, which can happen when copy operations are not fast enough.
 This free space check will fail when multiple instances are sharing the same drive though. In this case it's recommended to partition the drive and give each plotter their own space.
+
+`-Q` can be used to limit the maxmimum number of plots to be cached in `-t`, this is useful to avoid a slowdown of `-t` as it gets full.
 
 In case of remote copy, the plotter will automatically pause and resume operation when the remote host goes down or the receiver (`chia_plot_sink`) is restarted.
 
