@@ -39,6 +39,10 @@ full_node: WARNING  Used farmer reward of block 2187769 as dev fee (3.125 % on a
 ```
 It will show the block height as well as the average fee that applies, depending on if the proof was computed via CPU or GPU.
 
+### Pool Partial Difficulty
+
+When farming NFT plots on a pool it is recommended to set the partial difficulty to 18 or more, otherwise your harvester will be overloaded with computing full proofs.
+
 ### Usage
 
 Using the Gigahorse binaries is pretty much the same as with a normal Chia installation:
