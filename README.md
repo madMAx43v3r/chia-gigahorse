@@ -48,6 +48,12 @@ chia stop all -d
 ```
 Otherwise the `chia ...` commands will use the old version that is already running.
 
+### Installation
+
+```
+sudo apt install libgomp1
+```
+
 ## Gigahorse GPU Plotter
 
 You can find the GPU plotter binaries in [cuda-plotter](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/cuda-plotter).
