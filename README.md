@@ -59,6 +59,8 @@ chia stop all -d
 ```
 Otherwise the `chia ...` commands will use the old version that is already running.
 
+Note: There is no need to re-sync the blockchain, Gigahorse node will re-use your existing DB and config. Even the old v1 DB format still works.
+
 ### Installation
 
 ```
