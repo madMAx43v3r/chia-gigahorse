@@ -41,6 +41,7 @@ It will show the block height as well as the average fee that applies, depending
 
 Using the Gigahorse binaries is pretty much the same as with a normal Chia installation:
 ```
+tar xf chia-gigahorse-farmer-*.tar.gz
 cd chia-gigahorse-farmer
 . ./activate.sh
 chia start farmer
