@@ -67,6 +67,10 @@ Note: There is no need to re-sync the blockchain, Gigahorse node will re-use you
 sudo apt install libgomp1
 ```
 
+### Known Issues
+
+- `chia plots check` does not work, you can ignore the errors for now, your plots are fine if they show up in `chia farm summary`.
+
 ## Gigahorse GPU Plotter
 
 You can find the GPU plotter binaries in [cuda-plotter](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/cuda-plotter).
