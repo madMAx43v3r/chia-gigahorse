@@ -14,6 +14,8 @@ MMX testnet10 and mainnet will have a plot filter of 256.
 
 When you mix different K size and C levels, only the higest RAM / VRAM requirement will apply.
 
+For now all the compute is done on the harvester machine, offloading to farmer machine will be supported in the future.
+
 ## Chia Gigahorse Node / Farmer / Harvester
 
 In the [release](https://github.com/madMAx43v3r/chia-gigahorse/releases) section you can find Chia Blockchain binaries to farm compressed plots created with the new plotters provided in this repository.
