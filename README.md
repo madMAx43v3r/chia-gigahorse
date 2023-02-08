@@ -8,9 +8,9 @@ MMX testnet10 and mainnet will have a plot filter of 256.
 
 ### RAM / VRAM requirements to farm
 
-![image](https://user-images.githubusercontent.com/951738/217619134-d011d8f0-bf8c-4710-8fac-c368ca3f3b39.png)
+![image](https://user-images.githubusercontent.com/951738/217621063-bec9e8b7-3fc0-40f9-a6d7-649e3d90b015.png)
 
-![image](https://user-images.githubusercontent.com/951738/217619257-dc3e2572-c9b9-48e0-8d56-13f6dc18dc0e.png)
+![image](https://user-images.githubusercontent.com/951738/217621150-b110fb00-12be-452d-8ea5-ece2fb69cc40.png)
 
 When you mix different K size and C levels, only the higest RAM / VRAM requirement will apply.
 
