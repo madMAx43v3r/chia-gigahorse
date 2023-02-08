@@ -28,8 +28,8 @@ The dev fee is as follows:
 - 1.562 % when using CPU(s) to farm compressed plots
 - 0 % for regular uncompressed plots
 
-The fee is applied per harvester, so you can mix CPU and GPU harvesters.
 When you find a block there's a chance the farmer reward is used as fee, this is a random process.
+The fee is applied per harvester, so you can mix CPU and GPU harvesters. A uncompressed plot never pays a fee, however if your harvester has a GPU and a plot is not using the GPU (because too low C level) it still counts as GPU.
 
 When the fee is paid from a block, you will see a log entry like this:
 ```
