@@ -79,4 +79,6 @@ To test how many plots you can farm on a given system you can use the `ProofOfSp
 
 Plot Sink is a tool to receive plots over the network and copy them to multiple HDDs in parallel.
 
-See open source repository: https://github.com/madMAx43v3r/chia-plot-sink.git
+You can find binaries in [plot-sink](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/plot-sink)
+
+See also the open source repository: https://github.com/madMAx43v3r/chia-plot-sink
