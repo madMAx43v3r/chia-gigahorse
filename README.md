@@ -30,7 +30,7 @@ The dev fee is as follows:
 - 1.562 % when using CPU(s) to farm compressed plots
 - 0 % for regular uncompressed plots
 
-When you find a block there's a chance the farmer reward is used as fee, this is a random process.
+When you find a block there's a chance the 0.25 XCH farmer reward is used as fee, this is a random process.
 
 When the fee is paid from a block, you will see a log entry like this:
 ```
