@@ -8,7 +8,9 @@ MMX testnet10 and mainnet will have a plot filter of 256.
 
 ### RAM / VRAM requirements to farm
 
-TODO
+![image](https://user-images.githubusercontent.com/951738/217619134-d011d8f0-bf8c-4710-8fac-c368ca3f3b39.png)
+
+![image](https://user-images.githubusercontent.com/951738/217619257-dc3e2572-c9b9-48e0-8d56-13f6dc18dc0e.png)
 
 ## Chia Gigahorse Node / Farmer / Harvester
 
