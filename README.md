@@ -54,26 +54,26 @@ The default value of 120 sec will cause you to loose rewards with higher plot co
 
 ### Usage
 
-Using the Gigahorse binaries is pretty much the same as with a normal Chia installation:
-```
-tar xf chia-gigahorse-farmer-*.tar.gz
-cd chia-gigahorse-farmer
-./chia.bin start farmer
-```
-Note the usage of `./chia.bin` instead of just `chia`. This is the only difference in usage with Gigahorse.
-
 Make sure to close any other instances first:
 ```
 chia stop all -d
 ```
-Otherwise the `./chia.bin ...` commands will use the old version that is already running.
+Otherwise the `./chia.bin ...` command will use the old version that is already running.
 
-Note: There is no need to re-sync the blockchain, Gigahorse node will re-use your existing DB and config. Even the old v1 DB format still works.
+Using the Gigahorse binaries is pretty much the same as with a normal Chia installation:
+```
+cd chia-gigahorse-farmer
+./chia.bin start farmer
+```
+Note the usage of `./chia.bin ...` instead of just `chia ...`, this is the only difference in usage with Gigahorse.
+
+Also: There is no need to re-sync the blockchain, Gigahorse node will re-use your existing DB and config. Even the old v1 DB format still works.
 
 ### Installation
 
 ```
 sudo apt install libgomp1
+tar xf chia-gigahorse-farmer-*.tar.gz
 ```
 
 ### Known Issues
