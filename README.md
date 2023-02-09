@@ -58,24 +58,17 @@ Using the Gigahorse binaries is pretty much the same as with a normal Chia insta
 ```
 tar xf chia-gigahorse-farmer-*.tar.gz
 cd chia-gigahorse-farmer
-. ./activate.sh
-chia start farmer
+./chia.bin start farmer
 ```
+Note the usage of `./chia.bin` instead of just `chia`. This is the only difference in usage with Gigahorse.
 
 Make sure to close any other instances first:
 ```
 chia stop all -d
 ```
-Otherwise the `chia ...` commands will use the old version that is already running.
+Otherwise the `./chia.bin ...` commands will use the old version that is already running.
 
 Note: There is no need to re-sync the blockchain, Gigahorse node will re-use your existing DB and config. Even the old v1 DB format still works.
-
-To make sure you are using the Gigahorse version:
-```
-~/chia-gigahorse-farmer$ chia
-Usage: chia.bin [OPTIONS] COMMAND [ARGS]...
-```
-It should say: `Usage: chia.bin ...`
 
 ### Installation
 
