@@ -4,7 +4,7 @@ This version creates v2.4 compressed plots, with compression level `-C` from 1 t
 
 Both Chia and MMX are supported. The respective binary node / harvester are needed to farm these plots.
 
-Remote copy to a plot sink is now supported via `-d @hostname`.
+Remote copy to a plot sink is now supported via `-d @hostname` or `-d @ip`.
 
 ## Usage
 
@@ -24,20 +24,16 @@ Usage:
 
   -k, --size arg       K size (default = 32, k <= 32)
   -C, --level arg      Compression level (default = 1, min = 1, max = 9)
-  -x, --port arg       Network port (default = 8444, chives = 9699, MMX =
-                       11337)
+  -x, --port arg       Network port (default = 8444, chives = 9699, MMX = 11337)
   -n, --count arg      Number of plots to create (default = 1, -1 = infinite)
   -r, --threads arg    Number of threads (default = 4)
   -u, --buckets arg    Number of buckets (default = 256)
   -v, --buckets3 arg   Number of buckets for phase 3+4 (default = buckets)
   -t, --tmpdir arg     Temporary directory, needs ~220 GiB (default = $PWD)
-  -2, --tmpdir2 arg    Temporary directory 2, needs ~110 GiB [RAM] (default =
-                       <tmpdir>)
-  -d, --finaldir arg   Final directory to copy plot in parallel (default =
-                       <tmpdir>)
+  -2, --tmpdir2 arg    Temporary directory 2, needs ~110 GiB [RAM] (default = <tmpdir>)
+  -d, --finaldir arg   Final directory to copy plots to (default = <tmpdir>, remote = @host)
   -z, --dstport arg    Destination port for remote copy (default = 1337)
-  -s, --stagedir arg   Stage directory to write plot file (default =
-                       <tmpdir>)
+  -s, --stagedir arg   Stage directory to write plot file (default = <tmpdir>)
   -w, --waitforcopy    Wait for copy to start next plot
   -p, --poolkey arg    Pool Public Key (48 bytes)
   -c, --contract arg   Pool Contract Address (62 chars)
@@ -48,6 +44,7 @@ Usage:
   -K, --rmulti2 arg    Thread multiplier for P2 (default = 1)
       --version        Print version
       --help           Print help
+
 ```
 
 Make sure to crank up `<threads>` if you have plenty of cores, the default is 4.
@@ -62,3 +59,11 @@ With the new default of 256 buckets it's about 0.5 GB per thread at most.
 `sudo mount -t tmpfs -o size=110G tmpfs /mnt/ram/`
 
 Note: 128 GiB System RAM minimum required for RAM disk.
+
+### Remote Copy
+
+```
+./chia_plot -d @192.168.0.111 ...
+```
+Replace `192.168.0.111` with the IP address or hostname where `chia_plot_sink` is running.
+
