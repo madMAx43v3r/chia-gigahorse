@@ -70,6 +70,13 @@ Otherwise the `chia ...` commands will use the old version that is already runni
 
 Note: There is no need to re-sync the blockchain, Gigahorse node will re-use your existing DB and config. Even the old v1 DB format still works.
 
+To make sure you are using the Gigahorse version:
+```
+~/chia-gigahorse-farmer$ chia
+Usage: chia.bin [OPTIONS] COMMAND [ARGS]...
+```
+It should say: `Usage: chia.bin ...`
+
 ### Installation
 
 ```
