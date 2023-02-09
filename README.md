@@ -78,6 +78,11 @@ tar xf chia-gigahorse-farmer-*.tar.gz
 
 ### Known Issues
 
+None
+
+### Fixed in latest version
+
+- Farming of regular uncompressed plots does not work (invalid partials, missing partials)
 - `chia plots check` does not work, you can ignore the errors for now, your plots are fine if they show up in `chia farm summary`.
 
 ## Gigahorse GPU Plotter
