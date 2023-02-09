@@ -42,6 +42,16 @@ It will show the block height as well as the average fee that applies, depending
 
 When farming NFT plots on a pool it is recommended to set the partial difficulty to 18 or more, otherwise your harvester will be overloaded with computing full proofs.
 
+### Plot Reload Interval
+
+Gigahorse harvester does not support the plot cache (yet), as such you need to increase your plot reload interval to at least 3600 seconds in `config.yaml`:
+```
+harvester:
+  plots_refresh_parameter:
+    interval_seconds: 3600
+```
+The default value of 120 sec will cause you to loose rewards with higher plot counts.
+
 ### Usage
 
 Using the Gigahorse binaries is pretty much the same as with a normal Chia installation:
