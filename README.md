@@ -44,13 +44,13 @@ When farming NFT plots on a pool it is recommended to set the partial difficulty
 
 ### Plot Reload Interval
 
-Gigahorse harvester does not support the plot cache (yet), as such you need to increase your plot reload interval to at least 3600 seconds in `config.yaml`:
+It is recommended to increase your plot reload interval to at least 3600 seconds in `config.yaml`:
 ```
 harvester:
   plots_refresh_parameter:
     interval_seconds: 3600
 ```
-The default value of 120 sec will cause you to loose rewards with higher plot counts.
+The default value of 120 sec will cause too much CPU load with large plot counts.
 
 ### Usage
 
