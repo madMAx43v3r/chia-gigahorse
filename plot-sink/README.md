@@ -23,3 +23,11 @@ You can use the `chia_plot_copy` tool to manually send plots to a plot sink as f
 ./chia_plot_copy -d -t <IP/HOST> -- my/path/plot-*
 ```
 `-d` will delete plots when the copy is successful.
+
+### Windows
+
+Windows PowerShell (and Command Prompt) doesn't expand wildcards like a typical shell, so you have to jump through an extra hoop to expand any wildcard(s) before calling the program:
+
+```
+.\chia_plot_copy.exe -d -t <IP/HOST> -- $(Resolve-Path -Path "my\path\plot-*")
+```
