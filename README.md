@@ -6,6 +6,8 @@ Since Chia still has a plot filter of 512 until some time in 2024, the farming c
 
 MMX testnet10 and mainnet will have a plot filter of 256.
 
+Join the Discord for support: https://discord.gg/BswFhNkMzY
+
 ### RAM / VRAM requirements to farm
 
 ![image](https://user-images.githubusercontent.com/951738/217621063-bec9e8b7-3fc0-40f9-a6d7-649e3d90b015.png)
