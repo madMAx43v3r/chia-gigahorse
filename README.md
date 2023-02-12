@@ -6,6 +6,8 @@ Since Chia still has a plot filter of 512 until some time in 2024, the farming c
 
 MMX testnet10 and mainnet will have a plot filter of 256.
 
+Join the Discord for support: https://discord.gg/BswFhNkMzY
+
 ### RAM / VRAM requirements to farm
 
 ![image](https://user-images.githubusercontent.com/951738/217621063-bec9e8b7-3fc0-40f9-a6d7-649e3d90b015.png)
@@ -82,8 +84,9 @@ None
 
 ### Fixed in latest version
 
-- Farming of regular uncompressed plots does not work (invalid partials, missing partials)
-- `chia plots check` does not work, you can ignore the errors for now, your plots are fine if they show up in `chia farm summary`.
+- Farming of regular uncompressed plots (invalid partials, missing partials)
+- `./chia.bin plots check` not working
+- `./chia.bin version` showing wrong version
 
 ## Gigahorse GPU Plotter
 
