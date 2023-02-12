@@ -36,7 +36,11 @@ Usage:
   -f, --farmerkey arg  Farmer Public Key (48 bytes)
   -Z, --unique         Make unique plot (default = false)
   -S, --streams arg    Number of parallel streams (default = 4, must be >= 2)
-  -M, --memory arg     Max shared / pinned memory in GiB (default =
+  -Q, --maxtmp arg     Max number of plots to cache in tmpdir (default = -1)
+  -W, --maxcopy arg    Max number of parallel copies (default = 1)
+  -M, --memory arg     Max shared / pinned memory in GiB (default = unlimited)
+      --version        Print version
+      --help           Print help
 ```
 
 Important: `-t` only stores the final plot file, to cache it for final copy. \
