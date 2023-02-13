@@ -78,6 +78,14 @@ sudo apt install libgomp1
 tar xf chia-gigahorse-farmer-*.tar.gz
 ```
 
+### Limit GPU / RAM usage
+
+Please take a look at:
+- [How to limit GPU usage](https://github.com/madMAx43v3r/chia-gigahorse/blob/master/chiapos/README.md#limit-gpu-usage)
+- [How to limit RAM usage](https://github.com/madMAx43v3r/chia-gigahorse/blob/master/chiapos/README.md#limit-ram-usage)
+
+Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d`
+
 ### Known Issues
 
 None
