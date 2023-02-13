@@ -7,6 +7,7 @@ In case of CPU only and more than 8 cores, you can increase `-r` to get more per
 The harvester and this tool will automatically use all availalable GPUs where it is supported.
 Lower C levels will use CPU only since GPU is not efficient for those.
 
+## Limit GPU usage
 To disable GPU usage or to limit to a certain number of GPUs you can set environment variable:
 ```
 export CHIAPOS_MAX_CUDA_DEVICES=0
@@ -21,6 +22,7 @@ export CUDA_VISIBLE_DEVICES=1,2
 ```
 This will apply to all CUDA applications however.
 
+## Limit RAM usage
 To reduce RAM usage or increase the max number of cores used you can tune environment variable:
 ```
 export CHIAPOS_MAX_CORES=8
