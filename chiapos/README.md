@@ -1,13 +1,14 @@
 # ProofOfSpace
 
-Use `-r 8` to get optimal performance, this will run `check` and `lookup` in parallel using 8 threads.
+Use `./ProofOfSpace -r 16` to get optimal performance, this will run `check` and `lookup` in parallel using 16 threads.
 
-In case of CPU only and more than 8 cores, you can increase `-r` to get more performace.
+In case of CPU only and more than 16 cores, you can increase `-r` to get more performace.
 
 The harvester and this tool will automatically use all availalable GPUs where it is supported.
-Lower C levels will use CPU only since GPU is not efficient for those.
+Lower C levels (less than K32 C3) will use CPU only since GPU is not efficient for those.
 
 ## Limit GPU usage
+
 To disable GPU usage or to limit to a certain number of GPUs you can set environment variable:
 ```
 export CHIAPOS_MAX_CUDA_DEVICES=0
@@ -20,9 +21,14 @@ Alternatively you can set `CUDA_VISIBLE_DEVICES` to a list of devices to use:
 ```
 export CUDA_VISIBLE_DEVICES=1,2
 ```
-This will apply to all CUDA applications however.
+This will use the second and third device. (first device is `0`)
+
+Note: `CUDA_VISIBLE_DEVICES` applies to all CUDA applications.
+
+Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d`
 
 ## Limit RAM usage
+
 To reduce RAM usage or increase the max number of cores used you can tune environment variable:
 ```
 export CHIAPOS_MAX_CORES=8
@@ -31,12 +37,11 @@ export CHIAPOS_MAX_CORES=64
 ```
 The default is `16` cores, which means RAM is allocated for 16 threads, irrespective of how many physical cores are present.
 
-To reduce RAM usage while keeping maximum performance, `CHIAPOS_MAX_CORES` should be set to the number of physical cores / threads.
+To reduce RAM usage while keeping maximum performance, `CHIAPOS_MAX_CORES` should be set to the number of physical cores or threads, when not using GPU(s).
 
-The actual RAM usage depends on the maximum K size and compression level of your plots, and can be approximated as:
-```
-RAM_needed_GB = 2^(K_max + C_max - 38) * CHIAPOS_MAX_CORES
-```
+When using GPU(s) to farm, it is recommended to allocate 2 cores per low end GPU, 4 cores per mid range GPU and 8 cores per high end GPU. With faster CPUs you can use less cores, and thus les RAM.
+
+Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d`
 
 ## Checking plots
 
