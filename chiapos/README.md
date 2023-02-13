@@ -39,7 +39,7 @@ The default is `16` cores, which means RAM is allocated for 16 threads, irrespec
 
 To reduce RAM usage while keeping maximum performance, `CHIAPOS_MAX_CORES` should be set to the number of physical cores or threads, when not using GPU(s).
 
-When using GPU(s) to farm, it is recommended to allocate 2 cores per low end GPU, 4 cores per mid range GPU and 8 cores per high end GPU. With faster CPUs you can use less cores, and thus les RAM.
+When using GPU(s) to farm, it is recommended to allocate 2 cores per low end GPU, 4 cores per mid range GPU and 8 cores per high end GPU. With faster CPUs you can use less cores, and thus less RAM.
 
 Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d`
 
