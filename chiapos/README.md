@@ -15,6 +15,12 @@ export CHIAPOS_MAX_CUDA_DEVICES=1
 ```
 For example if you have a fast and a slow GPU, set `CHIAPOS_MAX_CUDA_DEVICES=1`, to only use the fast one.
 
+Alternatively you can set `CUDA_VISIBLE_DEVICES` to a list of devices to use:
+```
+export CUDA_VISIBLE_DEVICES=1,2
+```
+This will apply to all CUDA applications however.
+
 To reduce RAM usage or increase the max number of cores used you can tune environment variable:
 ```
 export CHIAPOS_MAX_CORES=8
