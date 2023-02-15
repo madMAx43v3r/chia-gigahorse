@@ -27,7 +27,8 @@ Usage:
   -g, --device arg     CUDA device (default = 0)
   -r, --ndevices arg   Number of CUDA devices (default = 1)
   -t, --tmpdir arg     Temporary directory for plot storage (default = $PWD)
-  -2, --tmpdir2 arg    Temporary directory 2 for hybrid mode (default = @RAM)
+  -2, --tmpdir2 arg    Temporary directory 2 for 1/2 hybrid mode (default = @RAM)
+  -3, --tmpdir3 arg    Temporary directory 3 for 1/4 hybrid mode (default = @RAM)
   -d, --finaldir arg   Final destinations (default = <tmpdir>, remote = @HOST)
   -z, --dstport arg    Destination port for remote copy (default = 1337)
   -w, --waitforcopy    Wait for copy to start next plot
@@ -44,7 +45,7 @@ Usage:
 ```
 
 Important: `-t` only stores the final plot file, to cache it for final copy. \
-Important: `-2` should be an SSD for partial RAM mode, not a RAM disk. \
+Important: `-2` / `-3` should be an SSD for partial RAM mode, not a RAM disk. \
 Important: `-M` is need on Windows to limit max GPU shared memory, see below.
 
 Note: The first plot will be slow due to memory allocation. Hence `-n -1` is the recommended way of plotting with Gigahorse.
@@ -65,22 +66,31 @@ Example with full RAM mode and local destination:
 cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -d /mnt/hdd1/ -d /mnt/hdd2/ -p <pool_key> -f <farmer_key>
 ```
 
-### Partial RAM mode (SSD for `-2`)
+### 1/2 Partial RAM mode (128G RAM, SSD for `-2`)
 
-To enable partial RAM mode, specify an SSD drive for `-2`.
-
-Example with partial RAM mode and remote copy:
+To enable partial RAM mode, specify an SSD drive for `-2`:
 ```
 cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -2 /mnt/fast_ssd/ -d @REMOTE_HOST -p <pool_key> -f <farmer_key>
 ```
-`REMOTE_HOST` can be a host name or IP address, the `@` prefix is needed to signal remote copy mode.
-
-Example with partial RAM mode and local destination:
-```
-cuda_plot_kxx -n -1 -C 7 -t /mnt/slow_ssd/ -2 /mnt/fast_ssd/ -d /mnt/hdd1/ -d /mnt/hdd2/ -p <pool_key> -f <farmer_key>
-```
 
 `tmpdir2` requires around 150G - 180G of free space for k32, depending on compression level.
+
+### 1/4 Partial RAM mode (64G RAM, SSD for `-3`)
+
+To enable 1/4 partial RAM mode, specify an SSD drive for `-3`.
+```
+cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -3 /mnt/fast_ssd/ -d @REMOTE_HOST -p <pool_key> -f <farmer_key>
+```
+
+`tmpdir3` requires around 250G of free space for k32, depending on compression level.
+
+#### Multiple SSDs for 1/4 RAM mode
+
+You can also specify `-2` and `-3` together, where `-3` should be the faster SSD as it will get most of the writes:
+```
+cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -2 /mnt/fast_ssd/ -3 /mnt/super_fast_ssd/ -d @REMOTE_HOST -p <pool_key> -f <farmer_key>
+```
+If `-2` is not specified it defaults to the same as `-3`.
 
 ### Multiple Destinations
 
