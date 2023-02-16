@@ -49,6 +49,7 @@ Important: `-2` / `-3` should be an SSD for partial RAM mode, not a RAM disk. \
 Important: `-M` is need on Windows to limit max GPU shared memory, see below.
 
 Note: The first plot will be slow due to memory allocation. Hence `-n -1` is the recommended way of plotting with Gigahorse.
+Note: `-W` is per HDD, not global. And it doesnt apply to remote destinations. Use `-Q` to limit max number of total parallel copies.
 
 ### Full RAM mode (no `-2`)
 
