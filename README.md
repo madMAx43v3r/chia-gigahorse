@@ -54,7 +54,7 @@ harvester:
 ```
 The default value of 120 sec will cause too much CPU load with large plot counts.
 
-### Usage
+### Usage Linux
 
 Make sure to close any other instances first:
 ```
@@ -71,12 +71,38 @@ Note the usage of `./chia.bin ...` instead of just `chia ...`, this is the only 
 
 Also: There is no need to re-sync the blockchain, Gigahorse node will re-use your existing DB and config. Even the old v1 DB format still works.
 
+### Usage Windows
+
+Make sure to close any running Chia GUI first.
+
+To start the farmer double click `start_farmer.cmd` in `chia-gigahorse-farmer`, this will open a terminal where you can continue to issue commands.
+To only open a terminal without starting anything you can use `chia.cmd`. To stop everything you can use `stop_all.cmd`.
+
+The usage in general is the same as normal chia:
+```
+.\chia.exe start farmer
+.\chia.exe farm summary
+.\chia.exe plotnft show
+.\chia.exe show -s
+.\chia.exe wallet show
+.\chia.exe stop all -d
+```
+
+You can even start the official Chia GUI after starting Gigahorse, however it needs to be the same version. It will still complain about version mismatch but when the base version (like `1.6.2`) is the same then it works.
+
+When you close the GUI everything will be stopped, so you need to restart Gigahorse via `start_farmer.cmd` or `.\chia.exe start farmer` again if so desired.
+
 ### Installation
 
+#### Linux
 ```
 sudo apt install libgomp1
 tar xf chia-gigahorse-farmer-*.tar.gz
 ```
+
+#### Windows
+
+Just unzip the chia-gigahorse-farmer-*.zip somewhere.
 
 ### Limit GPU / RAM usage
 
