@@ -104,7 +104,7 @@ tar xf chia-gigahorse-farmer-*.tar.gz
 
 Just unzip the chia-gigahorse-farmer-*.zip somewhere.
 
-You might also have to install latest Microsoft Visual C++ Redistributable: https://aka.ms/vs/17/release/vc_redist.x86.exe
+You might also have to install latest Microsoft Visual C++ Redistributable: https://aka.ms/vs/17/release/vc_redist.x64.exe
 
 ### Limit GPU / RAM usage
 
