@@ -18,6 +18,17 @@ When you mix different K size and C levels, only the higest RAM / VRAM requireme
 
 For now all the compute is done on the harvester machine, offloading to farmer machine will be supported in the future.
 
+## FlexFarmer v2.3.0
+
+Using FlexFarmer is an alternative to running Gigahorse Chia node / farmer / harvester. It does not require running a Node, but you have to switch your NFT to flexpool.
+
+See here for more info on how to use FlexFarmer:
+https://www.reddit.com/r/Flexpool/comments/11a2mqe/flexfarmer_v230_gigahorse_madmax43v3rs_compressed/
+
+GPU farming on Nvidia is only supported on Linux for now. Support for AMD and Intel is in the works, and that will work on Windows as well.
+
+Note: The fee is taken from the partials with FlexFarmer, instead of the 0.25 XCH farmer block reward, so there is no fear of paying too much fee if unlucky.
+
 ## Chia Gigahorse Node / Farmer / Harvester
 
 In the [release](https://github.com/madMAx43v3r/chia-gigahorse/releases) section you can find Chia Blockchain binaries to farm compressed plots created with the new plotters provided in this repository.
@@ -39,17 +50,6 @@ When the fee is paid from a block, you will see a log entry like this:
 full_node: WARNING  Used farmer reward of block 2187769 as dev fee (3.125 % on average)
 ```
 It will show the block height as well as the average fee that applies, depending on if the proof was computed via CPU or GPU.
-
-### FlexFarmer v2.3.0
-
-Using FlexFarmer is an alternative to running Gigahorse Chia Node + Farmer + Harvester. It does not require running a Node, but you have to switch your NFT to flexpool.
-
-See here for more info on how to use FlexFarmer:
-https://www.reddit.com/r/Flexpool/comments/11a2mqe/flexfarmer_v230_gigahorse_madmax43v3rs_compressed/
-
-GPU farming on Nvidia is only supported on Linux for now. Support for AMD and Intel is in the works, and that will work on Windows as well.
-
-Note: The fee is taken from the partials with FlexFarmer, instead of the 0.25 XCH farmer block reward, so there is no fear of paying too much fee if unlucky.
 
 ### Pool Partial Difficulty
 
