@@ -18,6 +18,9 @@ When buying a new GPU, it's recommended to go for a Turing or newer.
 ## Usage
 
 ```
+For <pool_key> and <farmer_key>: see output of `chia keys show`.
+To plot for pools, specify <contract_address> via -c (instead of <pool_key>): see output of `chia plotnft show`.
+
 Usage:
   cuda_plot [OPTION...]
 
@@ -58,40 +61,48 @@ All that's needed is a `-t` drive to cache the plots for final copy.
 
 Example with full RAM mode and remote copy:
 ```
-cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -d @REMOTE_HOST -p <pool_key> -f <farmer_key>
+cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -d @REMOTE_HOST -c <contract_address> -f <farmer_key>
 ```
 `REMOTE_HOST` can be a host name or IP address, the `@` prefix is needed to signal remote copy mode.
 
 Example with full RAM mode and local destination:
 ```
-cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -d /mnt/hdd1/ -d /mnt/hdd2/ -p <pool_key> -f <farmer_key>
+cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -d /mnt/hdd1/ -d /mnt/hdd2/ -c <contract_address> -f <farmer_key>
 ```
+
+N.B. If you want to make OG, non-NFT compressed plots, use `-p <pool_key>` instead of `-c <contract_address>`.
 
 ### 1/2 Partial RAM mode (128G RAM, SSD for `-2`)
 
 To enable partial RAM mode, specify an SSD drive for `-2`:
 ```
-cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -2 /mnt/fast_ssd/ -d @REMOTE_HOST -p <pool_key> -f <farmer_key>
+cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -2 /mnt/fast_ssd/ -d @REMOTE_HOST -c <contract_address> -f <farmer_key>
 ```
 
 `tmpdir2` requires around 150G - 180G of free space for k32, depending on compression level.
+
+N.B. If you want to make OG, non-NFT compressed plots, use `-p <pool_key>` instead of `-c <contract_address>`.
 
 ### 1/4 Partial RAM mode (64G RAM, SSD for `-3`)
 
 To enable 1/4 partial RAM mode, specify an SSD drive for `-3`.
 ```
-cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -3 /mnt/fast_ssd/ -d @REMOTE_HOST -p <pool_key> -f <farmer_key>
+cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -3 /mnt/fast_ssd/ -d @REMOTE_HOST -c <contract_address> -f <farmer_key>
 ```
 
 `tmpdir3` requires around 250G of free space for k32, depending on compression level.
+
+N.B. If you want to make OG, non-NFT compressed plots, use `-p <pool_key>` instead of `-c <contract_address>`.
 
 #### Multiple SSDs for 1/4 RAM mode
 
 You can also specify `-2` and `-3` together, where `-3` should be the faster SSD as it will get most of the writes:
 ```
-cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -2 /mnt/fast_ssd/ -3 /mnt/super_fast_ssd/ -d @REMOTE_HOST -p <pool_key> -f <farmer_key>
+cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -2 /mnt/fast_ssd/ -3 /mnt/super_fast_ssd/ -d @REMOTE_HOST -c <contract_address> -f <farmer_key>
 ```
 If `-2` is not specified it defaults to the same as `-3`.
+
+N.B. If you want to make OG, non-NFT compressed plots, use `-p <pool_key>` instead of `-c <contract_address>`.
 
 ### Multiple Destinations
 
