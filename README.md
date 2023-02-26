@@ -107,7 +107,7 @@ When you close the GUI everything will be stopped, so you need to restart Gigaho
 
 #### Linux
 ```
-sudo apt install libgomp1
+sudo apt install libgomp1 ocl-icd-opencl-dev
 tar xf chia-gigahorse-farmer-*.tar.gz
 ```
 
