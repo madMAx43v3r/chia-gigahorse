@@ -17,6 +17,8 @@ export CHIAPOS_MAX_CUDA_DEVICES=1
 ```
 For example if you have a fast and a slow GPU, set `CHIAPOS_MAX_CUDA_DEVICES=1`, to only use the fast one.
 
+The same works for OpenCL via `CHIAPOS_MAX_OPENCL_DEVICES`.
+
 Alternatively you can set `CUDA_VISIBLE_DEVICES` to a list of devices to use:
 ```
 export CUDA_VISIBLE_DEVICES=1,2
@@ -26,6 +28,17 @@ This will use the second and third device. (first device is `0`)
 Note: `CUDA_VISIBLE_DEVICES` applies to all CUDA applications.
 
 Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d`
+
+### Select OpenCL Platform
+
+If you have more than one OpenCL platform, like Intel + AMD, you have to select one to be used for farming.
+For example to use AMD:
+```
+export CHIAPOS_OPENCL_PLATFORM="AMD Accelerated Parallel Processing"
+```
+The name of your platform can be found using `clinfo`, see `Platform Name`.
+
+CUDA is automatically used for Nvidia GPUs when available, there is no need to disable OpenCL for Nvidia.
 
 ## Limit RAM usage
 
