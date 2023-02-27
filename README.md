@@ -131,9 +131,8 @@ Note: When changing environment variables you need to restart the Chia daemon fo
 
 ### Fixed in latest version
 
-- Farming of regular uncompressed plots (invalid partials, missing partials)
-- `./chia.bin plots check` not working
-- `./chia.bin version` showing wrong version
+- Multiple OpenCL GPUs not working together when farming
+- Multiple GPUs not being fully utilized when farming
 
 ## Gigahorse GPU Plotter
 
