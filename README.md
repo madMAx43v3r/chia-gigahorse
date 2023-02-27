@@ -127,7 +127,7 @@ Note: When changing environment variables you need to restart the Chia daemon fo
 
 ### Known Issues
 
-None
+- AMD GPU getting stuck in Linux, workaround is: `watch -n 0.1 sudo cat /sys/kernel/debug/dri/0/amdgpu_pm_info`
 
 ### Fixed in latest version
 
