@@ -41,7 +41,8 @@ Usage:
   -Z, --unique         Make unique plot (default = false)
   -S, --streams arg    Number of parallel streams (default = 4, must be >= 2)
   -Q, --maxtmp arg     Max number of plots to cache in tmpdir (default = -1)
-  -W, --maxcopy arg    Max number of parallel copies (default = 1)
+  -A, --copylimit arg  Max number of parallel copies in total (default = -1)
+  -W, --maxcopy arg    Max number of parallel copies to same HDD (default = 1, unlimited = -1)
   -M, --memory arg     Max shared / pinned memory in GiB (default = unlimited)
       --version        Print version
       --help           Print help
