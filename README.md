@@ -1,10 +1,10 @@
-## Gigahorse Compressed Plots
+## Farming requirements
 
 C3-C4 compression CPU farming only.
 
 C7-C9   compression GPU farming only (old Xeon CPU = 100W per 20TB of C7 plots).
 
-
+## Gigahorse Compressed Plots
 
 ![image](https://user-images.githubusercontent.com/951738/217386439-751908c7-f1b3-4c4e-9c7a-073d9c9fa721.png)
 
