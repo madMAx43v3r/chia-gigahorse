@@ -53,7 +53,14 @@ It will show the block height as well as the average fee that applies, depending
 
 ### Pool Partial Difficulty
 
-When farming NFT plots on a pool it is recommended to set the partial difficulty to 18 or more, otherwise your harvester will be overloaded with computing full proofs.
+When farming NFT plots on a pool it is recommended to set the partial difficulty to 20 or more, otherwise your harvester will be overloaded with computing full proofs.
+
+The chance of having to compute a full proof is roughly `1 / (2 * difficulty)`. The cost of computing a full proof is 8 (for C6+) or 16 (for C5 and lower) times that of a quality lookup.
+
+For example:
+- Difficulty 20 (at C6+): `8 / 40 = 20 %` compute overhead
+- Difficulty 100 (at C6+): `8 / 200 = 4 %` compute overhead
+- Difficulty 1000 (at C6+): `8 / 2000 = 0.4 %` compute overhead
 
 ### Plot Reload Interval
 
