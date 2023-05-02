@@ -29,6 +29,8 @@ Note: `CUDA_VISIBLE_DEVICES` applies to all CUDA applications.
 
 Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d`
 
+Note: See here how to set environment variables in Windows: https://phoenixnap.com/kb/windows-set-environment-variable#ftoc-heading-4
+
 ### Select OpenCL Platform
 
 If you have more than one OpenCL platform, like Intel + AMD, you have to select one to be used for farming.
