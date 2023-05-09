@@ -124,8 +124,6 @@ Just unzip the chia-gigahorse-farmer-*.zip somewhere.
 
 You might also have to install latest Microsoft Visual C++ Redistributable: https://aka.ms/vs/17/release/vc_redist.x64.exe
 
-Latest versions also need OpenCL, which is provided by either the Intel, AMD or Nvidia GPU driver package. It is needed even if you don't plan on using it, so if you don't have any GPU, you can just install Intel's driver for example: https://registrationcenter-download.intel.com/akdlm/IRC_NAS/17207/intel_sdk_for_opencl_applications_2020.3.494.zip
-
 ### Limit GPU / RAM usage
 
 Please take a look at:
@@ -140,6 +138,7 @@ Note: When changing environment variables you need to restart the Chia daemon fo
 
 ### Fixed in latest version
 
+- Harvester crashing randomly after some time
 - Multiple OpenCL GPUs not working together when farming
 - Multiple GPUs not being fully utilized when farming
 
