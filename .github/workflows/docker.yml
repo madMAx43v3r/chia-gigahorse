@@ -19,7 +19,7 @@ jobs:
       packages: write
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}-chia-gigahorse
+      IMAGE_NAME: ${{ github.repository }}
     strategy:
       fail-fast: false
       matrix:
