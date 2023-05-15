@@ -73,33 +73,25 @@ Note: When changing environment variables you need to restart the Chia daemon fo
 ## Checking plots
 
 ```
-./ProofOfSpace check -r 8 -f *.plot
+./ProofOfSpace check -r 8 -f plot-kxx-cx-xxx.plot
 ```
 
 ## Farming benchmark
 
-To check how many plots of a certain K size and C level you can farm on a machine on Linux:
+To check how many plots of a certain K size and C level you can farm on a machine:
 ```
-time ./ProofOfSpace lookup -r 8 -f *.plot
+./ProofOfSpace lookup -r 8 -f plot-kxx-cx-xxx.plot
 ```
-
-To check how many plots of a certain K size and C level you can farm on a machine on Windows:
-```
-Measure-Command {./ProofOfSpace lookup -r 8 -f *.plot|Out-Default}
-```
-This will measure the total time of performing 1000 lookups.
+This test will use all available GPUs. In case of CPU farming, set `-r` to the number of CPU cores / threads.
 
 Note: **This should be performed with the plot on an SSD**, otherwise the benchmark will be IO bound and not accurate.
+Alternatively if you dont have an SSD, you can run the benchmark a second time on HDD to get a faily accurate reading, since the data will then be cached in RAM (at least on Linux, and if there is no major disk IO otherwise, like plot copies).
 
-Note: The `real` time is what counts, not `user`. (For Windows use `Total Seconds`)
-
-To convert the total time in seconds to maximum farm size in TiB:
+The formula to convert total time for 1000 lookups to maximum farm size in TiB is:
 ```
 max_farm_size_TiB = (plot_size_GiB / 1024) * plot_filter * 8 * 1000 / total_lookup_time_seconds;
 ```
-The plot filter on MMX testnet10 and mainnet will be `256`, while Chia and testnet9 are using `512`.
-
-In case of CPU farming, set `-r` to the number of CPU cores / threads.
+The plot filter on MMX testnet10 and mainnet will be `256`, while Chia is using `512`.
 
 ## List of all Options
 
