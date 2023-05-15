@@ -9,11 +9,9 @@ Lower C levels (less than K32 C3) will use CPU only since GPU is not efficient f
 
 ## Limit GPU usage
 
-To disable GPU usage or to limit to a certain number of GPUs you can set environment variable:
+To limit usage to a certain number of GPUs you can set environment variable:
 ```
-export CHIAPOS_MAX_CUDA_DEVICES=0
-or
-export CHIAPOS_MAX_CUDA_DEVICES=1
+export CHIAPOS_MAX_CUDA_DEVICES=X
 ```
 For example if you have a fast and a slow GPU, set `CHIAPOS_MAX_CUDA_DEVICES=1`, to only use the fast one.
 
@@ -30,6 +28,20 @@ Note: `CUDA_VISIBLE_DEVICES` applies to all CUDA applications.
 Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d`
 
 Note: See here how to set environment variables in Windows: https://phoenixnap.com/kb/windows-set-environment-variable#ftoc-heading-4
+
+### Disable GPU usage
+
+To disable usage of any GPU:
+```
+export CHIAPOS_MAX_GPU_DEVICES=0
+```
+
+To disable only CUDA or OpenCL GPU usage:
+```
+export CHIAPOS_MAX_CUDA_DEVICES=0
+or
+export CHIAPOS_MAX_OPENCL_DEVICES=0
+```
 
 ### Select OpenCL Platform
 
