@@ -42,6 +42,7 @@ export CHIAPOS_MAX_CUDA_DEVICES=0
 or
 export CHIAPOS_MAX_OPENCL_DEVICES=0
 ```
+This is needed to disable usage of an iGPU for example.
 
 ### Select OpenCL Platform
 
