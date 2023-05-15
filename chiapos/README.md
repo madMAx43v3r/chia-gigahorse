@@ -101,3 +101,10 @@ The plot filter on MMX testnet10 and mainnet will be `256`, while Chia and testn
 
 In case of CPU farming, set `-r` to the number of CPU cores / threads.
 
+## List of all Options
+
+- `CHIAPOS_MAX_CORES`: max number of CPU threads (needed even when using GPU(s), but probably less, see above)
+- `CHIAPOS_MAX_GPU_DEVICES`: max number of CUDA or OpenCL devices
+- `CHIAPOS_MAX_CUDA_DEVICES`: max number of CUDA devices (overrides CHIAPOS_MAX_GPU_DEVICES)
+- `CHIAPOS_MAX_OPENCL_DEVICES`: max number of OpenCL devices (overrides CHIAPOS_MAX_GPU_DEVICES)
+- `CHIAPOS_MIN_GPU_LOG_ENTRIES`: minimum work size for GPU, can be set to modify transition to GPU based on C level (default = 21)
