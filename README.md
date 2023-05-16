@@ -88,6 +88,8 @@ cd chia-gigahorse-farmer
 ```
 Note the usage of `./chia.bin ...` instead of just `chia ...`, this is the only difference in usage with Gigahorse.
 
+You can start the official Chia GUI after starting Gigahorse, however it needs to be the same version. It will still complain about version mismatch but when the base version (like 1.6.2) is the same then it works.
+
 Also: There is no need to re-sync the blockchain, Gigahorse node will re-use your existing DB and config. Even the old v1 DB format still works.
 
 ### Usage Windows
