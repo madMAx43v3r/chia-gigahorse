@@ -78,6 +78,7 @@ Make sure to close any other instances first:
 ```
 chia stop all -d
 ```
+Or close the Chia GUI if you are running it.
 Otherwise the `./chia.bin ...` command will use the old version that is already running.
 
 Using the Gigahorse binaries is pretty much the same as with a normal Chia installation:
@@ -91,22 +92,22 @@ Also: There is no need to re-sync the blockchain, Gigahorse node will re-use you
 
 ### Usage Windows
 
-Make sure to close any running Chia GUI first.
+Make sure to close any running Chia GUI first, otherwise you cannot start the Gigahorse version.
 
 To start the farmer double click `start_farmer.cmd` in `chia-gigahorse-farmer`, this will open a terminal where you can continue to issue commands.
 To only open a terminal without starting anything you can use `chia.cmd`. To stop everything you can use `stop_all.cmd`.
 
 The usage in general is the same as normal chia:
 ```
-.\chia.exe start farmer
-.\chia.exe farm summary
-.\chia.exe plotnft show
-.\chia.exe show -s
-.\chia.exe wallet show
-.\chia.exe stop all -d
+chia.exe start farmer (not: chia start farmer)
+chia.exe start harvester (not: chia start harvester)
+chia farm summary
+chia plotnft show
+chia show -s
+chia wallet show
+chia stop all -d
 ```
-
-You can even start the official Chia GUI after starting Gigahorse, however it needs to be the same version. It will still complain about version mismatch but when the base version (like `1.6.2`) is the same then it works.
+You can start the official Chia GUI after starting Gigahorse, however it needs to be the same version. It will still complain about version mismatch but when the base version (like `1.6.2`) is the same then it works.
 
 When you close the GUI everything will be stopped, so you need to restart Gigahorse via `start_farmer.cmd` or `.\chia.exe start farmer` again if so desired.
 
