@@ -16,8 +16,6 @@ Join the Discord for support: https://discord.gg/BswFhNkMzY
 
 When you mix different K size and C levels, only the higest RAM / VRAM requirement will apply.
 
-For now all the compute is done on the harvester machine, offloading to farmer machine will be supported in the future.
-
 ## FlexFarmer
 
 Using FlexFarmer is an alternative to running Gigahorse Chia node / farmer / harvester. It does not require running a Node, but you have to switch your NFT to flexpool.
@@ -141,7 +139,29 @@ Please take a look at:
 - [How to limit GPU usage](https://github.com/madMAx43v3r/chia-gigahorse/blob/master/chiapos/README.md#limit-gpu-usage)
 - [How to limit RAM usage](https://github.com/madMAx43v3r/chia-gigahorse/blob/master/chiapos/README.md#limit-ram-usage)
 
-Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d`
+Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d` or `chia.exe stop all -d`
+
+### Remote Compute
+
+It's possible to move the compute task to another machine or machines, in order to avoid having to install a GPU or powerful CPU in every harvester:
+
+![Remote_Compute_Drawings drawio](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/9bb8d9b7-6a15-4b4a-82aa-6ab72471d5e5)
+
+To use the remote compute feature:
+- Start `chia_recompute_server` on the machine that is doing the compute (included in release).
+- `export CHIAPOS_RECOMPUTE_HOST=...` on the harvester (replace `...` with the IP address or host name of the compute machine, and make sure to restart via `chia stop all -d` or `stop_all.cmd` on windows)
+- On Windows you need to set `CHIAPOS_RECOMPUTE_HOST` variable via system settings.
+- `CHIAPOS_RECOMPUTE_HOST` can be a list of recompute servers, such as `CHIAPOS_RECOMPUTE_HOST=192.168.0.11,192.168.0.12`. A non-standard port can be specified via `HOST:PORT` syntax, such as `localhost:12345`. Multiple servers are load balanced in a fault tolerant way.
+- `CHIAPOS_RECOMPUTE_PORT` can be set to specify a custom default port for `chia_recompute_server` (default = 11989).
+- See `chia_recompute_server --help` for available options.
+
+To use the remote compute proxy:
+- Start `chia_recompute_proxy -n B -n C ...` on a machine `A`. (`B`, `C`, etc are running `chia_recompute_server`)
+- Set `CHIAPOS_RECOMPUTE_HOST` on your harvester(s) to machine A.
+- `chia_recompute_proxy` can be run on a central machine, or on each harvester itself, in which case `A = localhost`.
+- See `chia_recompute_proxy --help` for available options.
+
+When using `CHIAPOS_RECOMPUTE_HOST`, the local CPU and GPUs are not used, unless you run a local `chia_recompute_server` and `CHIAPOS_RECOMPUTE_HOST` includes the local machine.
 
 ### Known Issues
 
