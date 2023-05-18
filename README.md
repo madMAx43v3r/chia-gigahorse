@@ -16,16 +16,14 @@ Join the Discord for support: https://discord.gg/BswFhNkMzY
 
 When you mix different K size and C levels, only the higest RAM / VRAM requirement will apply.
 
-For now all the compute is done on the harvester machine, offloading to farmer machine will be supported in the future.
-
-## FlexFarmer v2.3.0
+## FlexFarmer
 
 Using FlexFarmer is an alternative to running Gigahorse Chia node / farmer / harvester. It does not require running a Node, but you have to switch your NFT to flexpool.
 
 See here for more info on how to use FlexFarmer:
 https://www.reddit.com/r/Flexpool/comments/11a2mqe/flexfarmer_v230_gigahorse_madmax43v3rs_compressed/
 
-GPU farming on Nvidia is only supported on Linux for now. Support for AMD and Intel is in the works, and that will work on Windows as well.
+Right now only CPU and Nvidia GPU farming is supported on Linux, no Windows support yet.
 
 Note: The fee is taken from the partials with FlexFarmer, instead of the 0.25 XCH farmer block reward, so there is no fear of paying too much fee if unlucky.
 
@@ -78,19 +76,22 @@ Make sure to close any other instances first:
 ```
 chia stop all -d
 ```
-Or close the Chia GUI if you are running it.
-Otherwise the `./chia.bin ...` command will use the old version that is already running.
+Or close the Chia GUI if you are running it. Otherwise you cannot start the Gigahorse version.
 
 Using the Gigahorse binaries is pretty much the same as with a normal Chia installation:
 ```
 cd chia-gigahorse-farmer
-./chia.bin start farmer
+./chia.bin start farmer (full node + farmer + harvester)
+./chia.bin start harvester (remote harvester)
+./chia.bin show -s
+./chia.bin farm summary
+./chia.bin plotnft show
+./chia.bin wallet show
+./chia.bin stop all -d
 ```
 Note the usage of `./chia.bin ...` instead of just `chia ...`, this is the only difference in usage with Gigahorse.
 
-You can start the official Chia GUI after starting Gigahorse, however it needs to be the same version. It will still complain about version mismatch but when the base version (like 1.6.2) is the same then it works.
-
-Also: There is no need to re-sync the blockchain, Gigahorse node will re-use your existing DB and config. Even the old v1 DB format still works.
+Alternatively, you can `. ./activate.sh` in `chia-gigahorse-farmer` to be able to use `chia ...` commands instead of `./chia.bin ...`.
 
 ### Usage Windows
 
@@ -103,17 +104,22 @@ The usage in general is the same as normal chia:
 ```
 chia.exe start farmer (not: chia start farmer)
 chia.exe start harvester (not: chia start harvester)
+chia show -s
 chia farm summary
 chia plotnft show
-chia show -s
 chia wallet show
 chia stop all -d
 ```
-You can start the official Chia GUI after starting Gigahorse, however it needs to be the same version. It will still complain about version mismatch but when the base version (like `1.6.2`) is the same then it works.
 
-When you close the GUI everything will be stopped, so you need to restart Gigahorse via `start_farmer.cmd` or `.\chia.exe start farmer` again if so desired.
+### Official GUI + Gigahorse
+
+You can start the official Chia GUI after starting Gigahorse in a terminal, however it needs to be the same version. It will still complain about version mismatch but when the base version (like `1.6.2`) is the same then it works.
+
+When you close the GUI everything will be stopped, so you need to restart Gigahorse in the terminal again if so desired.
 
 ### Installation
+
+Note: There is no need to re-sync the blockchain, Gigahorse node will re-use your existing DB and config. Even the old v1 DB format still works.
 
 #### Linux
 ```
@@ -133,7 +139,29 @@ Please take a look at:
 - [How to limit GPU usage](https://github.com/madMAx43v3r/chia-gigahorse/blob/master/chiapos/README.md#limit-gpu-usage)
 - [How to limit RAM usage](https://github.com/madMAx43v3r/chia-gigahorse/blob/master/chiapos/README.md#limit-ram-usage)
 
-Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d`
+Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d` or `chia.exe stop all -d`
+
+### Remote Compute
+
+It's possible to move the compute task to another machine or machines, in order to avoid having to install a GPU or powerful CPU in every harvester:
+
+![Remote_Compute_Drawings drawio](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/9bb8d9b7-6a15-4b4a-82aa-6ab72471d5e5)
+
+To use the remote compute feature:
+- Start `chia_recompute_server` on the machine that is doing the compute (included in release).
+- `export CHIAPOS_RECOMPUTE_HOST=...` on the harvester (replace `...` with the IP address or host name of the compute machine, and make sure to restart via `chia stop all -d` or `stop_all.cmd` on windows)
+- On Windows you need to set `CHIAPOS_RECOMPUTE_HOST` variable via system settings.
+- `CHIAPOS_RECOMPUTE_HOST` can be a list of recompute servers, such as `CHIAPOS_RECOMPUTE_HOST=192.168.0.11,192.168.0.12`. A non-standard port can be specified via `HOST:PORT` syntax, such as `localhost:12345`. Multiple servers are load balanced in a fault tolerant way.
+- `CHIAPOS_RECOMPUTE_PORT` can be set to specify a custom default port for `chia_recompute_server` (default = 11989).
+- See `chia_recompute_server --help` for available options.
+
+To use the remote compute proxy:
+- Start `chia_recompute_proxy -n B -n C ...` on a machine `A`. (`B`, `C`, etc are running `chia_recompute_server`)
+- Set `CHIAPOS_RECOMPUTE_HOST` on your harvester(s) to machine A.
+- `chia_recompute_proxy` can be run on a central machine, or on each harvester itself, in which case `A = localhost`.
+- See `chia_recompute_proxy --help` for available options.
+
+When using `CHIAPOS_RECOMPUTE_HOST`, the local CPU and GPUs are not used, unless you run a local `chia_recompute_server` and `CHIAPOS_RECOMPUTE_HOST` includes the local machine.
 
 ### Known Issues
 
