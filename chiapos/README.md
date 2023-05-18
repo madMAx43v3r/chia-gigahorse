@@ -101,3 +101,8 @@ The plot filter on MMX testnet10 and mainnet will be `256`, while Chia is using 
 - `CHIAPOS_MAX_CUDA_DEVICES`: max number of CUDA devices (overrides CHIAPOS_MAX_GPU_DEVICES)
 - `CHIAPOS_MAX_OPENCL_DEVICES`: max number of OpenCL devices (overrides CHIAPOS_MAX_GPU_DEVICES)
 - `CHIAPOS_MIN_GPU_LOG_ENTRIES`: minimum work size for GPU, can be set to modify transition to GPU based on C level (default = 21)
+- `CHIAPOS_RECOMPUTE_HOST`: list of recompute servers, separated by `,` without whitepace (optional port via `HOST:PORT` syntax)
+- `CHIAPOS_RECOMPUTE_PORT`: optional custom default port for recompute servers (default = 11989)
+- `CHIAPOS_RECOMPUTE_TIMEOUT`: timeout in milliseconds for processing a request (default = 5000)
+- `CHIAPOS_RECOMPUTE_CONNECT_TIMEOUT`: timeout in milliseconds for connecting to a server (default = 2000)
+- `CHIAPOS_RECOMPUTE_RETRY_INTERVAL`: interval in seconds how often to retry using a previously failed server (default = 100)
