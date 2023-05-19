@@ -163,6 +163,15 @@ To use the remote compute proxy:
 
 When using `CHIAPOS_RECOMPUTE_HOST`, the local CPU and GPUs are not used, unless you run a local `chia_recompute_server` and `CHIAPOS_RECOMPUTE_HOST` includes the local machine.
 
+#### CPU based Compute Servers
+For CPU based compute it's important to increase `CHIAPOS_MAX_CORES` on the harvesters to achieve full CPU utilization on compute servers.
+Because `CHIAPOS_MAX_CORES` is the maximum parallel requests made from a harvester to recompute servers, and a request is processed on a single CPU core only.
+By default `CHIAPOS_MAX_CORES` is the number of phsical CPU cores on the harvester.
+
+For example if you have a single compute server with 32 CPU cores, you should set `CHIAPOS_MAX_CORES` on the harvesters to 32.
+The sum of `CHIAPOS_MAX_CORES` accross all harvesters should be greater or equal to the sum of CPU cores on all compute servers.
+In case of low number of harvesters (ie. 1-3) you should set `CHIAPOS_MAX_CORES` to the number of CPU cores on your compute server.
+
 ### Known Issues
 
 - AMD GPU getting stuck in Linux, workaround is: `watch -n 0.1 sudo cat /sys/kernel/debug/dri/0/amdgpu_pm_info`
