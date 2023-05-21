@@ -12,7 +12,6 @@ RUN apt-get update && apt-get -y upgrade \
 WORKDIR /app
 COPY docker-start.sh .
 ARG GIT_RELEASE
-ENV GIT_RELEASE=${GIT_RELEASE%-*}
 ARG GIT_RELEASE_URL=https://github.com/madMAx43v3r/chia-gigahorse/releases/download/v${GIT_RELEASE}/chia-gigahorse-farmer-${GIT_RELEASE}-x86_64.tar.gz
 RUN curl -L ${GIT_RELEASE_URL} --output chia-gigahorse-farmer.tar.gz \
     && tar -xf chia-gigahorse-farmer.tar.gz \
@@ -32,6 +31,7 @@ EXPOSE 8555/tcp
 CMD ["./docker-start.sh"]
 
 FROM base AS amd
+ARG GIT_RELEASE
 ARG AMD_DRIVER=amdgpu-pro-20.40-1147286-ubuntu-20.04.tar.xz
 ARG AMD_DRIVER_URL=https://drivers.amd.com/drivers/linux
 RUN mkdir -p /tmp/opencl-driver-amd \
@@ -43,6 +43,7 @@ RUN mkdir -p /tmp/opencl-driver-amd \
     && rm -rf /tmp/opencl-driver-amd
 
 FROM base AS nvidia
+ARG GIT_RELEASE
 RUN mkdir -p /etc/OpenCL/vendors && \
     echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
 ENV NVIDIA_VISIBLE_DEVICES all
