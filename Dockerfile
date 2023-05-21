@@ -12,6 +12,7 @@ RUN apt-get update && apt-get -y upgrade \
 WORKDIR /app
 COPY docker-start.sh .
 ARG GIT_RELEASE
+ENV GIT_RELEASE=${GIT_RELEASE%-*}
 ARG GIT_RELEASE_URL=https://github.com/madMAx43v3r/chia-gigahorse/releases/download/v${GIT_RELEASE}/chia-gigahorse-farmer-${GIT_RELEASE}-x86_64.tar.gz
 RUN curl -L ${GIT_RELEASE_URL} --output chia-gigahorse-farmer.tar.gz \
     && tar -xf chia-gigahorse-farmer.tar.gz \
