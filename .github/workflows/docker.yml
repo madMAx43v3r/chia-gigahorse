@@ -46,7 +46,7 @@ jobs:
             latest=${{ matrix.latest-tag-behaviour }}
             suffix=${{ matrix.version-suffix }}
           tags: |
-            type=match,pattern=\d.\d.\d.\d
+            type=match,pattern=\d.\d.\d
             type=match,pattern=\d.\d
             type=match,pattern=\d
 
