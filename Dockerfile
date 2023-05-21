@@ -13,6 +13,7 @@ WORKDIR /app
 COPY docker-start.sh .
 ARG GIT_RELEASE
 ARG GIT_RELEASE_URL=https://github.com/madMAx43v3r/chia-gigahorse/releases/download/v${GIT_RELEASE}/chia-gigahorse-farmer-${GIT_RELEASE}-x86_64.tar.gz
+SHELL ["/bin/bash", "-c"]
 RUN GIT_RELEASE=${GIT_RELEASE%-*} \
     && curl -L ${GIT_RELEASE_URL} --output chia-gigahorse-farmer.tar.gz \
     && tar -xf chia-gigahorse-farmer.tar.gz \
