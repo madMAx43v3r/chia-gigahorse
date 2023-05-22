@@ -47,8 +47,8 @@ jobs:
             suffix=${{ matrix.version-suffix }}
           tags: |
             type=match,pattern=\d+.\d+.\d+.*
-            type=match,pattern=^[^\d]*(\d+.\d+).giga.*
-            type=match,pattern=[^\d]*(\d+)*giga.*
+            type=match,pattern=\d+.\d+
+            type=match,pattern=\d+
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
