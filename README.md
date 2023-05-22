@@ -166,3 +166,91 @@ Plot Sink is a tool to receive plots over the network and copy them to multiple 
 You can find binaries in [plot-sink](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/plot-sink)
 
 See also the open source repository: https://github.com/madMAx43v3r/chia-plot-sink
+
+## Docker Usage
+
+The Dockerfile file uses multiple build stages to support 3 different applications CPU-Only, AMD-GPU, NVIDIA-GPU.
+
+Each image provides a volume for `/data` which you can override with your own volume or a mapped path to customize the storage location of the node data.
+
+The default behavior of the container is to look in `/data` for an existing db/config and use it. Otherwise it will generate a fresh config and start syncing the node from scratch.
+
+You can set which services to run with the `CHIA_SERVICES` environment variable.
+
+Docker Run Examples:
+```
+-e CHIA_SERVICES="harvester"
+-e CHIA_SERVICES="node farmer-only"
+-e CHIA_SERVICES="node farmer-only wallet"
+```
+Docker Compose Examples:
+```yml
+environment:
+  - CHIA_SERVICES="harvester"
+
+environment:
+  - CHIA_SERVICES="node farmer-only"
+  
+environment:
+  - CHIA_SERVICES="node farmer-only wallet"
+```
+
+### CPU-Only
+
+Docker Run Example:
+
+`docker run --rm -it -v /path/to/.chia:/data chia-gigahorse`
+
+Docker Compose Example:
+```yml
+version: '3'
+services:
+  node:
+    image: chia-gigahorse
+    restart: unless-stopped
+    volumes:
+      - /path/to/.chia:/data
+```
+
+### AMD-GPU
+
+Docker Run Example:
+
+`docker run --rm -it --device=/dev/kfd --device=/dev/dri --group-add video --group-add render -v /path/to/.chia:/data chia-gigahorse-amd`
+
+Docker Compose Example:
+```yml
+version: '3'
+services:
+  node:
+    image: chia-gigahorse-amd
+    restart: unless-stopped
+    group_add:
+      - video
+      - render
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/kfd:/dev/kfd
+    volumes:
+      - /path/to/.chia:/data
+```
+Note: `- render` in `group_add` might need to be removed, depending on your system.
+
+### NVIDIA-GPU
+
+Docker Run Example:
+
+`docker run --rm -it --runtime=nvidia -v /path/to/.chia:/data chia-gigahorse-nvidia`
+
+Docker Compose Example:
+```yml
+version: '3'
+services:
+  node:
+    image: chia-gigahorse-nvidia
+    restart: unless-stopped
+    runtime: nvidia
+    volumes:
+      - /path/to/.chia:/data
+```
+Note: for nvidia you also need the `NVIDIA Container Toolkit` installed on the host, for more info please see: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
