@@ -46,9 +46,9 @@ jobs:
             latest=${{ matrix.latest-tag-behaviour }}
             suffix=${{ matrix.version-suffix }}
           tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+            type=match,pattern=\d+.\d+.\d+.*
+            type=match,pattern=\d+.\d+
+            type=match,pattern=\d+
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
