@@ -4,4 +4,4 @@
 
 trap "echo Shutting down ...; ./chia.bin stop all -d; exit 0" SIGINT SIGTERM
 
-while true; do sleep 1; done
+tail -F /dev/null
