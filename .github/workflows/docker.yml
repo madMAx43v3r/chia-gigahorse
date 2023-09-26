@@ -27,12 +27,15 @@ jobs:
           - final-build-stage: 'base'
             latest-tag-behaviour: auto
             version-suffix: ''
+            suffix-onlatest: false
           - final-build-stage: amd
-            latest-tag-behaviour: false
+            latest-tag-behaviour: auto
             version-suffix: '-amd'
+            suffix-onlatest: true
           - final-build-stage: nvidia
-            latest-tag-behaviour: false
+            latest-tag-behaviour: auto
             version-suffix: '-nvidia'
+            suffix-onlatest: true
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -44,7 +47,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: |
             latest=${{ matrix.latest-tag-behaviour }}
-            suffix=${{ matrix.version-suffix }}
+            suffix=${{ matrix.version-suffix }},onlatest=${{ matrix.suffix-onlatest }}
           tags: |
             type=match,pattern=\d+.\d+.\d+.*
             type=match,pattern=\d+.\d+
