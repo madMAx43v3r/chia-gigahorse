@@ -210,9 +210,111 @@ See also the open source repository: https://github.com/madMAx43v3r/chia-plot-si
 
 The Dockerfile file uses multiple build stages to support 3 different applications CPU-Only, AMD-GPU, NVIDIA-GPU.
 
-Each image provides a volume for `/data` which you can override with your own volume or a mapped path to customize the storage location of the node data.
+It is recommended to run the container with the `/root/.chia` directory mapped to a local volume for persistant storage of the database and config files
 
-The default behavior of the container is to look in `/data` for an existing db/config and use it. Otherwise it will generate a fresh config and start syncing the node from scratch.
+### CPU-Only
+
+Docker Run Example:
+
+`docker run --rm -it -v /path/to/.chia:/root/.chia -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest`
+
+Docker Compose Example:
+```yml
+version: '3'
+services:
+  chia:
+    image: ghcr.io/madmax43v3r/chia-gigahorse:latest
+    restart: unless-stopped
+    volumes:
+      - /path/to/.chia:/root/.chia
+#      - /path/to/plots:/plots
+#      - /path/to/ssl/ca:/path/in/container
+    ports:
+      - "8444:8444"
+    environment:
+#      TZ: 'UTC'
+#      CHIA_SERVICES: 'farmer'
+#      CHIA_UPNP: 'true'
+#      CHIA_LOG_LEVEL: 'WARNING'
+#      CHIA_HOSTNAME: 127.0.0.1
+#      CHIA_PLOTS:
+#      CHIA_FARMER_ADDRESS: 192.168.1.11
+#      CHIA_FARMER_PORT: 8447
+#      CHIA_CA: /path/in/container    
+```
+
+### AMD-GPU
+
+Docker Run Example:
+
+`docker run --rm -it --device=/dev/kfd --device=/dev/dri --group-add video --group-add render -v /path/to/.chia:/root/.chia -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest-amd`
+
+Docker Compose Example:
+```yml
+version: '3'
+services:
+  chia:
+    image: ghcr.io/madmax43v3r/chia-gigahorse:latest-amd
+    restart: unless-stopped
+    group_add:
+      - video
+      - render
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/kfd:/dev/kfd
+    volumes:
+      - /path/to/.chia:/root/.chia
+#      - /path/to/plots:/plots
+#      - /path/to/ssl/ca:/path/in/container
+    ports:
+      - "8444:8444"
+    environment:
+#      TZ: 'UTC'
+#      CHIA_SERVICES: 'farmer'
+#      CHIA_UPNP: 'true'
+#      CHIA_LOG_LEVEL: 'WARNING'
+#      CHIA_HOSTNAME: 127.0.0.1
+#      CHIA_PLOTS:
+#      CHIA_FARMER_ADDRESS: 192.168.1.11
+#      CHIA_FARMER_PORT: 8447
+#      CHIA_CA: /path/in/container 
+```
+Note: `- render` in `group_add` might need to be removed, depending on your system.
+
+### NVIDIA-GPU
+
+Docker Run Example:
+
+`docker run --rm -it --runtime=nvidia -v /path/to/.chia:/root/.chia -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest-nvidia`
+
+Docker Compose Example:
+```yml
+version: '3'
+services:
+  chia:
+    image: ghcr.io/madmax43v3r/chia-gigahorse:latest-nvidia
+    restart: unless-stopped
+    runtime: nvidia
+    volumes:
+      - /path/to/.chia:/root/.chia
+#      - /path/to/plots:/plots
+#      - /path/to/ssl/ca:/path/in/container
+    ports:
+      - "8444:8444"
+    environment:
+#      TZ: 'UTC'
+#      CHIA_SERVICES: 'farmer'
+#      CHIA_UPNP: 'true'
+#      CHIA_LOG_LEVEL: 'WARNING'
+#      CHIA_HOSTNAME: 127.0.0.1
+#      CHIA_PLOTS:
+#      CHIA_FARMER_ADDRESS: 192.168.1.11
+#      CHIA_FARMER_PORT: 8447
+#      CHIA_CA: /path/in/container 
+```
+Note: for nvidia you also need the `NVIDIA Container Toolkit` installed on the host, for more info please see: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
+
+### Further Customization
 
 You can set which services to run with the `CHIA_SERVICES` environment variable.
 
@@ -233,63 +335,10 @@ environment:
 environment:
   - CHIA_SERVICES="node farmer-only wallet"
 ```
+When setting `CHIA_SERVICES="harvester"` you will also need to specify the following environment variables `CHIA_CA` `CHIA_FARMER_ADDRESS` `CHIA_FARMER_PORT`
 
-### CPU-Only
+Docker Compose - uncomment the relevant lines in the example above and adjust the settings accordingly.
 
-Docker Run Example:
+Docker Run - add the following to your command:
 
-`docker run --rm -it -v /path/to/.chia:/data chia-gigahorse`
-
-Docker Compose Example:
-```yml
-version: '3'
-services:
-  node:
-    image: chia-gigahorse
-    restart: unless-stopped
-    volumes:
-      - /path/to/.chia:/data
-```
-
-### AMD-GPU
-
-Docker Run Example:
-
-`docker run --rm -it --device=/dev/kfd --device=/dev/dri --group-add video --group-add render -v /path/to/.chia:/data chia-gigahorse-amd`
-
-Docker Compose Example:
-```yml
-version: '3'
-services:
-  node:
-    image: chia-gigahorse-amd
-    restart: unless-stopped
-    group_add:
-      - video
-      - render
-    devices:
-      - /dev/dri:/dev/dri
-      - /dev/kfd:/dev/kfd
-    volumes:
-      - /path/to/.chia:/data
-```
-Note: `- render` in `group_add` might need to be removed, depending on your system.
-
-### NVIDIA-GPU
-
-Docker Run Example:
-
-`docker run --rm -it --runtime=nvidia -v /path/to/.chia:/data chia-gigahorse-nvidia`
-
-Docker Compose Example:
-```yml
-version: '3'
-services:
-  node:
-    image: chia-gigahorse-nvidia
-    restart: unless-stopped
-    runtime: nvidia
-    volumes:
-      - /path/to/.chia:/data
-```
-Note: for nvidia you also need the `NVIDIA Container Toolkit` installed on the host, for more info please see: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
+`-e CHIA_FARMER_ADDRESS="farmer.ip.address" -e CHIA_FARMER_PORT="8447" -v /path/to/ssl/ca:/path/in/container -e CHIA_CA="/path/in/container"`
