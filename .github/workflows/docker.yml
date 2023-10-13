@@ -28,13 +28,17 @@ jobs:
             latest-tag-behaviour: auto
             version-suffix: ''
             suffix-onlatest: false
-          - final-build-stage: amd
-            latest-tag-behaviour: auto
-            version-suffix: '-amd'
-            suffix-onlatest: true
           - final-build-stage: nvidia
             latest-tag-behaviour: auto
             version-suffix: '-nvidia'
+            suffix-onlatest: true
+          - final-build-stage: intel
+            latest-tag-behaviour: auto
+            version-suffix: '-intel'
+            suffix-onlatest: true
+          - final-build-stage: amd
+            latest-tag-behaviour: auto
+            version-suffix: '-amd'
             suffix-onlatest: true
     steps:
       - name: Checkout
