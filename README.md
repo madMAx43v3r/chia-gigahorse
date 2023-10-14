@@ -197,9 +197,9 @@ See also the open source repository: https://github.com/madMAx43v3r/chia-plot-si
 
 ## Docker Usage
 
-The Dockerfile file uses multiple build stages to support 3 different applications CPU-Only, AMD-GPU, NVIDIA-GPU.
+The Dockerfile file uses multiple build stages to support 4 different applications CPU-Only, NVIDIA-GPU, Intel-GPU, and AMD-GPU.
 
-It is recommended to run the container with the `/root/.chia` directory mapped to a local volume for persistant storage of the database and config files
+It is highly recommended to run the container with the `/root/.chia` directory mapped to a local volume for persistant storage of the database and config files
 
 ### CPU-Only
 
@@ -222,54 +222,18 @@ services:
       - "8444:8444"
     environment:
 #      TZ: 'UTC'
-#      CHIA_SERVICES: 'farmer'
+      CHIA_SERVICES: 'farmer'
 #      CHIA_UPNP: 'true'
 #      CHIA_LOG_LEVEL: 'WARNING'
 #      CHIA_HOSTNAME: 127.0.0.1
-#      CHIA_PLOTS:
-#      CHIA_FARMER_ADDRESS: 192.168.1.11
+#      CHIA_PLOTS: /plots
+### Remote harvester settings
+#      CHIA_FARMER_ADDRESS: 127.0.0.1
 #      CHIA_FARMER_PORT: 8447
-#      CHIA_CA: /path/in/container    
+#      CHIA_CA: /path/in/container
+### Remote compute server
+#      CHIAPOS_RECOMPUTE_HOST: 192.168.1.12   
 ```
-
-### AMD-GPU
-
-Docker Run Example:
-
-`docker run --rm -it --device=/dev/kfd --device=/dev/dri --group-add video --group-add render -v /path/to/.chia:/root/.chia -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest-amd`
-
-Docker Compose Example:
-```yml
-version: '3'
-services:
-  chia:
-    image: ghcr.io/madmax43v3r/chia-gigahorse:latest-amd
-    restart: unless-stopped
-    group_add:
-      - video
-      - render
-    devices:
-      - /dev/dri:/dev/dri
-      - /dev/kfd:/dev/kfd
-    volumes:
-      - /path/to/.chia:/root/.chia
-#      - /path/to/plots:/plots
-#      - /path/to/ssl/ca:/path/in/container
-    ports:
-      - "8444:8444"
-    environment:
-#      TZ: 'UTC'
-#      CHIA_SERVICES: 'farmer'
-#      CHIA_UPNP: 'true'
-#      CHIA_LOG_LEVEL: 'WARNING'
-#      CHIA_HOSTNAME: 127.0.0.1
-#      CHIA_PLOTS:
-#      CHIA_FARMER_ADDRESS: 192.168.1.11
-#      CHIA_FARMER_PORT: 8447
-#      CHIA_CA: /path/in/container 
-```
-Note: `- render` in `group_add` might need to be removed, depending on your system.
-
 ### NVIDIA-GPU
 
 Docker Run Example:
@@ -292,18 +256,99 @@ services:
       - "8444:8444"
     environment:
 #      TZ: 'UTC'
-#      CHIA_SERVICES: 'farmer'
+      CHIA_SERVICES: 'farmer'
 #      CHIA_UPNP: 'true'
 #      CHIA_LOG_LEVEL: 'WARNING'
 #      CHIA_HOSTNAME: 127.0.0.1
-#      CHIA_PLOTS:
-#      CHIA_FARMER_ADDRESS: 192.168.1.11
+#      CHIA_PLOTS: /plots
+### Remote harvester settings
+#      CHIA_FARMER_ADDRESS: 127.0.0.1
 #      CHIA_FARMER_PORT: 8447
-#      CHIA_CA: /path/in/container 
+#      CHIA_CA: /path/in/container
+### Remote compute server
+#      CHIAPOS_RECOMPUTE_HOST: 192.168.1.12
 ```
 Note: for nvidia you also need the `NVIDIA Container Toolkit` installed on the host, for more info please see: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
 
+### Intel-GPU
+
+Docker Run Example:
+
+`docker run --rm -it --device=/dev/dri -v /path/to/.chia:/root/.chia -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest-intel`
+
+Docker Compose Example:
+```yml
+version: '3'
+services:
+  chia:
+    image: ghcr.io/madmax43v3r/chia-gigahorse:latest-intel
+    restart: unless-stopped
+    devices:
+      - /dev/dri:/dev/dri
+    volumes:
+      - /path/to/.chia:/root/.chia
+#      - /path/to/plots:/plots
+#      - /path/to/ssl/ca:/path/in/container
+    ports:
+      - "8444:8444"
+    environment:
+#      TZ: 'UTC'
+      CHIA_SERVICES: 'farmer'
+#      CHIA_UPNP: 'true'
+#      CHIA_LOG_LEVEL: 'WARNING'
+#      CHIA_HOSTNAME: 127.0.0.1
+#      CHIA_PLOTS: /plots
+### Remote harvester settings
+#      CHIA_FARMER_ADDRESS: 127.0.0.1
+#      CHIA_FARMER_PORT: 8447
+#      CHIA_CA: /path/in/container
+### Remote compute server
+#      CHIAPOS_RECOMPUTE_HOST: 192.168.1.12
+```
+Note: for ARC GPU's you will need to be running kernel 6.2+ on your docker host
+
+### AMD-GPU
+
+Docker Run Example:
+
+`docker run --rm -it --device=/dev/kfd --device=/dev/dri -v /path/to/.chia:/root/.chia -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest-amd`
+
+Docker Compose Example:
+```yml
+version: '3'
+services:
+  chia:
+    image: ghcr.io/madmax43v3r/chia-gigahorse:latest-amd
+    restart: unless-stopped
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/kfd:/dev/kfd
+    volumes:
+      - /path/to/.chia:/root/.chia
+#      - /path/to/plots:/plots
+#      - /path/to/ssl/ca:/path/in/container
+    ports:
+      - "8444:8444"
+    environment:
+#      TZ: 'UTC'
+      CHIA_SERVICES: 'farmer'
+#      CHIA_UPNP: 'true'
+#      CHIA_LOG_LEVEL: 'WARNING'
+#      CHIA_HOSTNAME: 127.0.0.1
+#      CHIA_PLOTS: /plots
+### Remote harvester settings
+#      CHIA_FARMER_ADDRESS: 127.0.0.1
+#      CHIA_FARMER_PORT: 8447
+#      CHIA_CA: /path/in/container
+### Remote compute server
+#      CHIAPOS_RECOMPUTE_HOST: 192.168.1.12
+```
+
 ### Further Customization
+
+You can modify the container options by uncommenting the relevent settings in the docker-compose example and changing them from the defaults.
+
+#### Services
 
 You can set which services to run with the `CHIA_SERVICES` environment variable.
 
@@ -331,3 +376,14 @@ Docker Compose - uncomment the relevant lines in the example above and adjust th
 Docker Run - add the following to your command:
 
 `-e CHIA_FARMER_ADDRESS="farmer.ip.address" -e CHIA_FARMER_PORT="8447" -v /path/to/ssl/ca:/path/in/container -e CHIA_CA="/path/in/container"`
+
+#### Plots
+
+Add plot directories by uncommenting the CHIA_PLOTS environment variable and set the `/path/to/plots` volume to a local plot directory
+
+#### Keys
+
+Add keys by entering the container shell and using the chia keys command:
+
+`docker exec -it container-name bash`
+`./chia.bin keys add`
