@@ -16,17 +16,6 @@ Join the Discord for support: https://discord.gg/BswFhNkMzY
 
 When you mix different K size and C levels, only the higest RAM / VRAM requirement will apply.
 
-## FlexFarmer
-
-Using FlexFarmer is an alternative to running Gigahorse Chia node / farmer / harvester. It does not require running a Node, but you have to switch your NFT to flexpool.
-
-See here for more info on how to use FlexFarmer:
-https://www.reddit.com/r/Flexpool/comments/11a2mqe/flexfarmer_v230_gigahorse_madmax43v3rs_compressed/
-
-Right now only CPU and Nvidia GPU farming is supported on Linux, no Windows support yet.
-
-Note: The fee is taken from the partials with FlexFarmer, instead of the 0.25 XCH farmer block reward, so there is no fear of paying too much fee if unlucky.
-
 ## Chia Gigahorse Node / Farmer / Harvester
 
 In the [release](https://github.com/madMAx43v3r/chia-gigahorse/releases) section you can find Chia Blockchain binaries to farm compressed plots created with the new plotters provided in this repository.
