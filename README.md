@@ -134,7 +134,7 @@ When mixing different K size and C levels, only the higest RAM / VRAM requiremen
 
 ## K33+
 
-![image](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/75941d0a-9ef0-41fb-bb2f-3ad1c7e3ba69)
+![image](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/6bb34775-8e8b-480b-84f6-4bff49b46534)
 
 K33+ performance for the new C11 to C20 is considerably less than K32.
 In addition higher K size benefits more from a higher partial difficulty.
