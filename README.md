@@ -1,26 +1,20 @@
-## Gigahorse Compressed Plots
+## Gigahorse 2.0 Compressed Plots
 
-![image](https://user-images.githubusercontent.com/951738/217386439-751908c7-f1b3-4c4e-9c7a-073d9c9fa721.png)
+![image](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/5a9c1193-2a00-43e6-b3a5-44c20c9cd2ca)
 
-Since Chia still has a plot filter of 512 until some time in 2024, the farming capacity is twice that until then.
+The farming capacity for plot filter 256 is half that of 512. Chia is expected to transition to filter 256 in June 2024.
 
-MMX testnet10 and mainnet will have a plot filter of 256.
+Partial difficulty is now important for maximum farm size, especially for C9, C15, C19 and C20.
+
+Above chart is for partial difficulty 100. Solo farming roughly corresponds to a partial difficulty of 50k (50000).
 
 Join the Discord for support: https://discord.gg/BswFhNkMzY
-
-### RAM / VRAM requirements to farm
-
-![image](https://user-images.githubusercontent.com/951738/217621063-bec9e8b7-3fc0-40f9-a6d7-649e3d90b015.png)
-
-![image](https://user-images.githubusercontent.com/951738/217621150-b110fb00-12be-452d-8ea5-ece2fb69cc40.png)
-
-When you mix different K size and C levels, only the higest RAM / VRAM requirement will apply.
 
 ## Chia Gigahorse Node / Farmer / Harvester
 
 In the [release](https://github.com/madMAx43v3r/chia-gigahorse/releases) section you can find Chia Blockchain binaries to farm compressed plots created with the new plotters provided in this repository.
 
-The compressed plot harvester and farmer are not compatible with the official Chia node, it only works together with the Gigahorse node.
+The compressed plot harvester and farmer are not compatible with the official Chia Node, it only works together with the Gigahorse Node.
 However it's possible to use a wallet from the official Chia repository, instead of the Gigahorse binary wallet.
 
 Both NFT and OG plots are supported, as well as solo and pool farming (via the official pool protocol). Regular uncompressed plots are supported as well, so you can use the Gigahorse version while re-plotting your farm.
@@ -130,6 +124,21 @@ Please take a look at:
 
 Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d` or `chia.exe stop all -d`
 
+### RAM / VRAM requirements to farm
+
+![image](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/742fde23-cce2-4548-91ec-b22199fb435e)
+
+![image](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/a1fd6c50-711d-4b79-947a-76a32783ccec)
+
+When mixing different K size and C levels, only the higest RAM / VRAM requirement applies.
+
+## K33+
+
+![image](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/75941d0a-9ef0-41fb-bb2f-3ad1c7e3ba69)
+
+K33+ performance for the new C11 to C20 is considerably less than K32.
+In addition higher K size benefits more from a higher partial difficulty.
+
 ### Remote Compute
 
 It's possible to move the compute task to another machine or machines, in order to avoid having to install a GPU or powerful CPU in every harvester:
@@ -167,9 +176,7 @@ In case of low number of harvesters (ie. 1-3) you should set `CHIAPOS_MAX_CORES`
 
 ### Fixed in latest version
 
-- Harvester crashing randomly after some time
-- Multiple OpenCL GPUs not working together when farming
-- Multiple GPUs not being fully utilized when farming
+N / A
 
 ## Gigahorse GPU Plotter
 
