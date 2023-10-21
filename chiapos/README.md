@@ -1,6 +1,6 @@
 # ProofOfSpace
 
-Use `./ProofOfSpace -r 16` to get optimal performance, this will run `check` and `lookup` in parallel using 16 threads.
+Use `./ProofOfSpace -r 16` to get optimal performance, this will run `check`, `farm` and `lookup` in parallel using 16 threads.
 
 In case of CPU only and more than 16 cores, you can increase `-r` to get more performace.
 
@@ -79,9 +79,9 @@ Note: When changing environment variables you need to restart the Chia daemon fo
 
 ## Farming benchmark
 
-To check how many plots of a certain K size and C level you can farm on a machine:
+To check how many plots of a certain K size and C level you can farm at a specific partial difficulty:
 ```
-./ProofOfSpace lookup -r 8 -f plot-kxx-cx-xxx.plot
+./ProofOfSpace farm -r 8 --diff 100 -f plot-kxx-cxx-xxx.plot 1000
 ```
 This test will use all available GPUs. In case of CPU farming, set `-r` to the number of CPU cores / threads.
 
@@ -92,7 +92,6 @@ The formula to convert total time for 1000 lookups to maximum farm size in TiB i
 ```
 max_farm_size_TiB = (plot_size_GiB / 1024) * plot_filter * 8 * 1000 / total_lookup_time_seconds;
 ```
-The plot filter on MMX testnet10 and mainnet will be `256`, while Chia is using `512`.
 
 ## List of all Options
 
