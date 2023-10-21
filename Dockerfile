@@ -1,16 +1,18 @@
-FROM ubuntu:20.04 AS base
+FROM mikefarah/yq:4 AS yq
+
+FROM ubuntu:22.04 AS base
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get -y upgrade \
-		&& apt-get install -y \
-			xz-utils \
-			libgomp1 \
-			ocl-icd-libopencl1 \
-			curl \
-			clinfo \
-			&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+	xz-utils \
+	libgomp1 \
+	ocl-icd-libopencl1 \
+	curl \
+	clinfo \
+	&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY docker-start.sh .
+COPY --from=yq /usr/bin/yq /usr/bin/yq
+COPY docker-entrypoint.sh docker-start.sh .
 ARG GIT_RELEASE
 RUN GIT_RELEASE=${GIT_RELEASE%-*} \
     && curl -L https://github.com/madMAx43v3r/chia-gigahorse/releases/download/v${GIT_RELEASE}/chia-gigahorse-farmer-${GIT_RELEASE}-x86_64.tar.gz --output chia-gigahorse-farmer.tar.gz \
@@ -19,16 +21,24 @@ RUN GIT_RELEASE=${GIT_RELEASE%-*} \
     && rm -rf chia-gigahorse-farmer \
     && rm *.tar.gz
 
+
+ENV CHIA_ROOT="/root/.chia/mainnet"
 ENV CHIA_SERVICES="farmer"
-ENV CHIA_ROOT="/data/"
-VOLUME /data
 
-# node p2p port
-EXPOSE 8444/tcp
-# http api port
-EXPOSE 8555/tcp
+EXPOSE 8444 8555
 
+ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["./docker-start.sh"]
+
+FROM base AS nvidia
+RUN mkdir -p /etc/OpenCL/vendors && \
+    echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
+
+FROM base AS intel
+RUN apt-get update && apt-get install -y intel-opencl-icd \
+	&& rm -rf /var/lib/apt/lists/*
 
 FROM base AS amd
 ARG AMD_DRIVER=amdgpu-pro-20.40-1147286-ubuntu-20.04.tar.xz
@@ -39,10 +49,5 @@ RUN mkdir -p /tmp/opencl-driver-amd \
     && tar -Jxvf ${AMD_DRIVER} \
     && cd amdgpu-pro-20.40-1147286-ubuntu-20.04 \
     && ./amdgpu-install --opencl=legacy,pal --headless --no-dkms -y \
-    && rm -rf /tmp/opencl-driver-amd
-
-FROM base AS nvidia
-RUN mkdir -p /etc/OpenCL/vendors && \
-    echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
+    && rm -rf /tmp/opencl-driver-amd \
+    && rm -rf /var/lib/apt/lists/*
