@@ -1,6 +1,6 @@
 # Gigahorse GPU Plotter
 
-Gigahorse is a madMAx GPU plotter for compressed k32 plots either fully in RAM with 256G or partially in RAM with 128G.
+Gigahorse is a madMAx GPU plotter for compressed k32 plots either fully in RAM with 256G, partially in RAM with 128G or via disk mode.
 
 Other K sizes are supported as well, such as k29 - k34, in theory any K size (if compiled for it).
 RAM requirements scale with K size, so k33 needs 512G, k30 only needs 64G, etc.
@@ -24,38 +24,47 @@ To plot for pools, specify <contract_address> via -c (instead of <pool_key>): se
 Usage:
   cuda_plot [OPTION...]
 
-  -C, --level arg      Compression level (default = 1, min = 1, max = 9)
-  -x, --port arg       Network port (default = 8444, chives = 9699, MMX = 11337)
-  -n, --count arg      Number of plots to create (default = 1, -1 = infinite)
+  -C, --level arg      Compression level (1 to 9 and 11 to 20)
+  -x, --port arg       Network port (default = 8444, MMX = 11337)
+  -n, --count arg      Number of plots to create (default = 1, unlimited =
+                       -1)
   -g, --device arg     CUDA device (default = 0)
   -r, --ndevices arg   Number of CUDA devices (default = 1)
-  -t, --tmpdir arg     Temporary directory for plot storage (default = $PWD)
-  -2, --tmpdir2 arg    Temporary directory 2 for 1/2 hybrid mode (default = @RAM)
-  -3, --tmpdir3 arg    Temporary directory 3 for 1/4 hybrid mode (default = @RAM)
-  -d, --finaldir arg   Final destinations (default = <tmpdir>, remote = @HOST)
+  -t, --tmpdir arg     Temporary directories for plot storage (default =
+                       $PWD)
+  -2, --tmpdir2 arg    Temporary directory 2 for partial RAM / disk mode
+                       (default = @RAM)
+  -3, --tmpdir3 arg    Temporary directory 3 for disk mode (default = @RAM)
+  -d, --finaldir arg   Final destinations (default = <tmpdir>, remote =
+                       @HOST)
   -z, --dstport arg    Destination port for remote copy (default = 1337)
   -w, --waitforcopy    Wait for copy to start next plot
   -p, --poolkey arg    Pool Public Key (48 bytes)
   -c, --contract arg   Pool Contract Address (62 chars)
   -f, --farmerkey arg  Farmer Public Key (48 bytes)
   -Z, --unique         Make unique plot (default = false)
-  -S, --streams arg    Number of parallel streams (default = 4, must be >= 2)
+  -D, --directio       Use direct IO for final copy (default = false, Linux
+                       only)
+  -S, --streams arg    Number of parallel streams (default = 3, must be >= 2)
+  -B, --chunksize arg  Bucket chunk size in MiB (default = 16, 1 to 256)
   -Q, --maxtmp arg     Max number of plots to cache in tmpdir (default = -1)
   -A, --copylimit arg  Max number of parallel copies in total (default = -1)
-  -W, --maxcopy arg    Max number of parallel copies to same HDD (default = 1, unlimited = -1)
-  -M, --memory arg     Max shared / pinned memory in GiB (default = unlimited)
+  -W, --maxcopy arg    Max number of parallel copies to same HDD (default =
+                       1, unlimited = -1)
+  -M, --memory arg     Max shared / pinned memory in GiB (default =
+                       unlimited)
       --version        Print version
-      --help           Print help
+  -h, --help           Print help
 ```
 
 Important: `-t` only stores the final plot file, to cache it for final copy. \
-Important: `-2` / `-3` should be an SSD for partial RAM mode, not a RAM disk. \
+Important: `-2` / `-3` should be an SSD for partial RAM / disk mode, not a RAM disk. \
 Important: `-M` is need on Windows to limit max GPU shared memory, see below.
 
 Note: The first plot will be slow due to memory allocation. Hence `-n -1` is the recommended way of plotting with Gigahorse.\
 Note: `-W` is per HDD, not global. And it doesnt apply to remote destinations. Use `-Q` to limit max number of total parallel copies.
 
-### Full RAM mode (no `-2`)
+### Full RAM mode (no `-2`, no `-3`)
 
 The GPU plotter uses RAM internally, there is no need for a RAM disk.
 All that's needed is a `-t` drive to cache the plots for final copy.
@@ -73,7 +82,7 @@ cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -d /mnt/hdd1/ -d /mnt/hdd2/ -c <contract_a
 
 N.B. If you want to make OG, non-NFT compressed plots, use `-p <pool_key>` instead of `-c <contract_address>`.
 
-### 1/2 Partial RAM mode (128G RAM, SSD for `-2`)
+### Partial RAM mode (128G RAM, SSD for `-2`)
 
 To enable partial RAM mode, specify an SSD drive for `-2`:
 ```
@@ -84,14 +93,17 @@ cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -2 /mnt/fast_ssd/ -d @REMOTE_HOST -c <cont
 
 N.B. If you want to make OG, non-NFT compressed plots, use `-p <pool_key>` instead of `-c <contract_address>`.
 
-### 1/4 Partial RAM mode (64G RAM, SSD for `-3`)
+### Disk mode (8G RAM, SSD for `-3`, optional second SSD for `-2`)
 
-To enable 1/4 partial RAM mode, specify an SSD drive for `-3`.
+To enable disk mode, specify an SSD drive for `-3`.
 ```
 cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -3 /mnt/fast_ssd/ -d @REMOTE_HOST -c <contract_address> -f <farmer_key>
 ```
+Optionally another SSD can be used for `-2`, if not specified `-2` will be set to the same path as `-3`.
 
-`tmpdir3` requires around 250G of free space for k32, depending on compression level.
+`-2` gets 1/4 of the total writes, while `-3` gets 3/4 (so it should be the faster SSD).
+
+`tmpdir2` + `tmpdir3` requires around 250G of free space for k32, depending on compression level.
 
 N.B. If you want to make OG, non-NFT compressed plots, use `-p <pool_key>` instead of `-c <contract_address>`.
 
