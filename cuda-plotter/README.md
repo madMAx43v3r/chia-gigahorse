@@ -107,16 +107,6 @@ Optionally another SSD can be used for `-2`, if not specified `-2` will be set t
 
 N.B. If you want to make OG, non-NFT compressed plots, use `-p <pool_key>` instead of `-c <contract_address>`.
 
-#### Multiple SSDs for 1/4 RAM mode
-
-You can also specify `-2` and `-3` together, where `-3` should be the faster SSD as it will get most of the writes:
-```
-cuda_plot_kxx -n -1 -C 7 -t /mnt/ssd/ -2 /mnt/fast_ssd/ -3 /mnt/super_fast_ssd/ -d @REMOTE_HOST -c <contract_address> -f <farmer_key>
-```
-If `-2` is not specified it defaults to the same as `-3`.
-
-N.B. If you want to make OG, non-NFT compressed plots, use `-p <pool_key>` instead of `-c <contract_address>`.
-
 ### Multiple Destinations
 
 Multiple destinations can be specified by repeating `-d`:
