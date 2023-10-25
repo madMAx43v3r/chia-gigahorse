@@ -33,9 +33,6 @@ done
 if [[ ${CHIA_SERVICES} == "harvester" ]]; then
   if [[ -n ${CHIA_FARMER_ADDRESS} || -n ${CHIA_FARMER_PORT} || -n ${CHIA_CA} ]]; then
     ./chia.bin init -c "${CHIA_CA}" && ./chia.bin configure --set-farmer-peer "${CHIA_FARMER_ADDRESS}:${CHIA_FARMER_PORT}"
-  else
-    echo "A farmer peer address, port, and ca path are required."
-    exit
   fi
 fi
 
