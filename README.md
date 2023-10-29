@@ -106,7 +106,7 @@ Note: There is no need to re-sync the blockchain, Gigahorse node will re-use you
 
 #### Linux
 ```
-sudo apt install libgomp1 ocl-icd-libopencl1
+sudo apt install ocl-icd-libopencl1
 tar xf chia-gigahorse-farmer-*.tar.gz
 ```
 
