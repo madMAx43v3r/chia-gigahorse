@@ -71,7 +71,7 @@ jobs:
         with:
           context: chiapos/linux/x86_64
           target: ${{ matrix.final-build-stage }}
-          push: ${{ github.ref == 'refs/heads/master' }}
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
