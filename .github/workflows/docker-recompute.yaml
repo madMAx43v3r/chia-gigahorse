@@ -29,19 +29,19 @@ jobs:
       matrix:
         include:
           - final-build-stage: 'base'
-            latest-tag-behaviour: auto
+            latest-tag-behaviour: true
             version-suffix: ''
             suffix-onlatest: false
           - final-build-stage: nvidia
-            latest-tag-behaviour: auto
+            latest-tag-behaviour: true
             version-suffix: '-nvidia'
             suffix-onlatest: true
           - final-build-stage: intel
-            latest-tag-behaviour: auto
+            latest-tag-behaviour: true
             version-suffix: '-intel'
             suffix-onlatest: true
           - final-build-stage: amd
-            latest-tag-behaviour: auto
+            latest-tag-behaviour: true
             version-suffix: '-amd'
             suffix-onlatest: true
     steps:
@@ -56,8 +56,6 @@ jobs:
           flavor: |
             latest=${{ matrix.latest-tag-behaviour }}
             suffix=${{ matrix.version-suffix }},onlatest=${{ matrix.suffix-onlatest }}
-          tags: |
-            type=raw,value=latest
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
