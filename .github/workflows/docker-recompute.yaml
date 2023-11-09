@@ -23,7 +23,7 @@ jobs:
       packages: write
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: chia-recompute
+      IMAGE_NAME: ${{ github.repository }}-recompute
     strategy:
       fail-fast: false
       matrix:
@@ -52,7 +52,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           flavor: |
             latest=${{ matrix.latest-tag-behaviour }}
             suffix=${{ matrix.version-suffix }},onlatest=${{ matrix.suffix-onlatest }}
