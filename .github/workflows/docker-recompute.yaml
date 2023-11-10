@@ -3,7 +3,7 @@ name: Docker Recompute
 on:
   push:
     branches:
-      - '**'
+      - 'master'
     paths:
       - 'chiapos/linux/x86_64/chia_recompute*'
   workflow_dispatch:
