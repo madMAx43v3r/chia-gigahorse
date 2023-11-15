@@ -392,7 +392,7 @@ Docker Run - add the following to your command:
 
 #### Plots
 
-Add plot directories by uncommenting the CHIA_PLOTS environment variable and set the `/path/to/plots` volume to a local plot directory
+Add plot directories by uncommenting the `CHIA_PLOTS` environment variable and set the `/path/to/plots` volume to a local plot directory
 
 #### Keys
 
