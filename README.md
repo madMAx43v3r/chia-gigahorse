@@ -206,13 +206,13 @@ See also the open source repository: https://github.com/madMAx43v3r/chia-plot-si
 
 The Dockerfile file uses multiple build stages to support 4 different applications CPU-Only, NVIDIA-GPU, Intel-GPU, and AMD-GPU.
 
-It is highly recommended to run the container with the `/root/.chia` directory mapped to a local volume for persistant storage of the database and config files
+It is highly recommended to run the container with the `/root/.chia/mainnet` directory mapped to a local volume for persistant storage of the database and config files
 
 ### CPU-Only
 
 Docker Run Example:
 
-`docker run --rm -it -v /path/to/.chia:/root/.chia -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest`
+`docker run --rm -it -v /path/to/.chia:/root/.chia/mainnet -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest`
 
 Docker Compose Example:
 ```yml
@@ -222,7 +222,7 @@ services:
     image: ghcr.io/madmax43v3r/chia-gigahorse:latest
     restart: unless-stopped
     volumes:
-      - /path/to/.chia:/root/.chia
+      - /path/to/.chia:/root/.chia/mainnet
 #      - /path/to/plots:/plots
 #      - /path/to/ssl/ca:/path/in/container
     ports:
@@ -245,7 +245,7 @@ services:
 
 Docker Run Example:
 
-`docker run --rm -it --runtime=nvidia -v /path/to/.chia:/root/.chia -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest-nvidia`
+`docker run --rm -it --runtime=nvidia -v /path/to/.chia:/root/.chia/mainnet -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest-nvidia`
 
 Docker Compose Example:
 ```yml
@@ -256,7 +256,7 @@ services:
     restart: unless-stopped
     runtime: nvidia
     volumes:
-      - /path/to/.chia:/root/.chia
+      - /path/to/.chia:/root/.chia/mainnet
 #      - /path/to/plots:/plots
 #      - /path/to/ssl/ca:/path/in/container
     ports:
@@ -274,6 +274,8 @@ services:
 #      CHIA_CA: /path/in/container
 ### Remote compute server
 #      CHIAPOS_RECOMPUTE_HOST: 192.168.1.12
+### GPU Specific Options ###
+#      NVIDIA_VISIBLE_DEVICES: 0,3
 ```
 Note: for nvidia you also need the `NVIDIA Container Toolkit` installed on the host, for more info please see: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
 
@@ -281,7 +283,7 @@ Note: for nvidia you also need the `NVIDIA Container Toolkit` installed on the h
 
 Docker Run Example:
 
-`docker run --rm -it --device=/dev/dri -v /path/to/.chia:/root/.chia -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest-intel`
+`docker run --rm -it --device=/dev/dri -v /path/to/.chia:/root/.chia/mainnet -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest-intel`
 
 Docker Compose Example:
 ```yml
@@ -293,7 +295,7 @@ services:
     devices:
       - /dev/dri:/dev/dri
     volumes:
-      - /path/to/.chia:/root/.chia
+      - /path/to/.chia:/root/.chia/mainnet
 #      - /path/to/plots:/plots
 #      - /path/to/ssl/ca:/path/in/container
     ports:
@@ -311,6 +313,8 @@ services:
 #      CHIA_CA: /path/in/container
 ### Remote compute server
 #      CHIAPOS_RECOMPUTE_HOST: 192.168.1.12
+### GPU Specific Options ###
+#      CHIAPOS_MAX_OPENCL_DEVICES: 0
 ```
 Note: for ARC GPU's you will need to be running kernel 6.2+ on your docker host
 
@@ -318,7 +322,7 @@ Note: for ARC GPU's you will need to be running kernel 6.2+ on your docker host
 
 Docker Run Example:
 
-`docker run --rm -it --device=/dev/kfd --device=/dev/dri -v /path/to/.chia:/root/.chia -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest-amd`
+`docker run --rm -it --device=/dev/kfd --device=/dev/dri -v /path/to/.chia:/root/.chia/mainnet -p 8444:8444 ghcr.io/madmax43v3r/chia-gigahorse:latest-amd`
 
 Docker Compose Example:
 ```yml
@@ -331,7 +335,7 @@ services:
       - /dev/dri:/dev/dri
       - /dev/kfd:/dev/kfd
     volumes:
-      - /path/to/.chia:/root/.chia
+      - /path/to/.chia:/root/.chia/mainnet
 #      - /path/to/plots:/plots
 #      - /path/to/ssl/ca:/path/in/container
     ports:
@@ -349,6 +353,8 @@ services:
 #      CHIA_CA: /path/in/container
 ### Remote compute server
 #      CHIAPOS_RECOMPUTE_HOST: 192.168.1.12
+### GPU Specific Options ###
+#      CHIAPOS_MAX_OPENCL_DEVICES: 0
 ```
 
 ### Further Customization
