@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ -n "${TZ}" ]]; then
-  echo "Setting timezone to ${TZ}"
+  echo "Timezone set to ${TZ}"
 fi
 
 if [[ ${CHIA_RECOMPUTE_PROXY} == "true" ]]; then
