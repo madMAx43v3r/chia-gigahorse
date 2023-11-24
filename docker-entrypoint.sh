@@ -1,8 +1,7 @@
 #!/bin/bash
 
 if [[ -n "${TZ}" ]]; then
-  echo "Setting timezone to ${TZ}"
-  echo "$TZ" > /etc/timezone
+  echo "Timezone set to ${TZ}"
 fi
 
 ./chia.bin init --fix-ssl-permissions
@@ -31,7 +30,7 @@ done
 
 ## Remote Harvester Support
 if [[ ${CHIA_SERVICES} == "harvester" ]]; then
-  if [[ -n ${CHIA_FARMER_ADDRESS} || -n ${CHIA_FARMER_PORT} || -n ${CHIA_CA} ]]; then
+  if [[ -n ${CHIA_FARMER_ADDRESS} && -n ${CHIA_FARMER_PORT} && -n ${CHIA_CA} ]]; then
     ./chia.bin init -c "${CHIA_CA}" && ./chia.bin configure --set-farmer-peer "${CHIA_FARMER_ADDRESS}:${CHIA_FARMER_PORT}"
   fi
 fi
