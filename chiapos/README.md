@@ -129,11 +129,7 @@ services:
 #      CHIA_RECOMPUTE_PORT: 12000
 ### Enable Proxy Mode ###
 #      CHIA_RECOMPUTE_PROXY: 'true'
-#      CHIA_RECOMPUTE_NODES: 192.168.1.1,192.168.1.2:11990
-### GPU Specific Options ###
-#      CHIAPOS_MAX_CUDA_DEVICES: 0
-#      CHIAPOS_MAX_OPENCL_DEVICES: 0
-#      CUDA_VISIBLE_DEVICES: 0   
+#      CHIA_RECOMPUTE_NODES: 192.168.1.1,192.168.1.2:11990  
 ```
 ## NVIDIA-GPU
 
@@ -158,9 +154,7 @@ services:
 #      CHIA_RECOMPUTE_PROXY: 'true'
 #      CHIA_RECOMPUTE_NODES: 192.168.1.1,192.168.1.2:11990
 ### GPU Specific Options ###
-#      CHIAPOS_MAX_CUDA_DEVICES: 0
-#      CHIAPOS_MAX_OPENCL_DEVICES: 0
-#      CUDA_VISIBLE_DEVICES: 0 
+#      NVIDIA_VISIBLE_DEVICES: 0,3
 ```
 Note: for nvidia you also need the `NVIDIA Container Toolkit` installed on the host, for more info please see: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
 
@@ -188,9 +182,7 @@ services:
 #      CHIA_RECOMPUTE_PROXY: 'true'
 #      CHIA_RECOMPUTE_NODES: 192.168.1.1,192.168.1.2:11990
 ### GPU Specific Options ###
-#      CHIAPOS_MAX_CUDA_DEVICES: 0
 #      CHIAPOS_MAX_OPENCL_DEVICES: 0
-#      CUDA_VISIBLE_DEVICES: 0 
 ```
 Note: for ARC GPU's you will need to be running kernel 6.2+ on your docker host
 
@@ -219,7 +211,5 @@ services:
 #      CHIA_RECOMPUTE_PROXY: 'true'
 #      CHIA_RECOMPUTE_NODES: 192.168.1.1,192.168.1.2:11990
 ### GPU Specific Options ###
-#      CHIAPOS_MAX_CUDA_DEVICES: 0
 #      CHIAPOS_MAX_OPENCL_DEVICES: 0
-#      CUDA_VISIBLE_DEVICES: 0 
 ```

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ -n "${TZ}" ]]; then
+  echo "Timezone set to ${TZ}"
+fi
+
 if [[ ${CHIA_RECOMPUTE_PROXY} == "true" ]]; then
   if [[ -n ${CHIA_RECOMPUTE_NODES} ]]; then
     nodes=""

@@ -1,7 +1,7 @@
 FROM debian:12-slim AS base
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
-	ocl-icd-libopencl1 \
+	ocl-icd-libopencl1 tzdata \
 	&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /chia-recompute
