@@ -6,7 +6,7 @@ The farming capacity for plot filter 256 is half that of 512. Chia is expected t
 
 Partial difficulty is now important for maximum farm size, especially for C9, C15, C19 and C20.
 
-Above chart is for partial difficulty 100. Solo farming roughly corresponds to a partial difficulty of 50k (50000).
+Above chart is for partial difficulty 100. Solo farming roughly corresponds to a partial difficulty of 500k (500000).
 
 Join the Discord for support: https://discord.gg/BswFhNkMzY
 
