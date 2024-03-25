@@ -1,10 +1,10 @@
 ## Gigahorse 3.0 Compressed Plots
 
-![image](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/6a459f39-2302-409f-b768-a61e621346ce)
+![Screenshot from 2024-03-25 13-05-39](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/c0c671d8-b75b-4c06-a6a5-1b00740c4669)
 
 The farming capacity for plot filter 256 is half that of 512. Chia is expected to transition to filter 256 in June 2024.
 
-Partial difficulty is now important for maximum farm size, especially for C30 to C33.
+Partial difficulty is now important for maximum farm size, especially for C29 to C33.
 
 Solo farming roughly corresponds to a partial difficulty of 800k (800000).
 
