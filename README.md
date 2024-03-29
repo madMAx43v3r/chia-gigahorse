@@ -1,6 +1,6 @@
 ## Gigahorse 3.0 Compressed Plots
 
-![Screenshot from 2024-03-29 00-05-47](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/4afa4a6b-d3f8-4e6e-aae9-73209437169a)
+![Screenshot from 2024-03-29 23-00-30](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/3b6fb9ce-1c7c-4956-a848-aefb16a75d63)
 
 The farming capacity for plot filter 256 is half that of 512. Chia is expected to transition to filter 256 in June 2024.
 
