@@ -4,7 +4,7 @@
 
 The farming capacity for plot filter 256 is half that of 512. Chia is expected to transition to filter 256 in June 2024.
 
-Partial difficulty is important for maximum farm size, especially for C9 / C19 / C20 and C29 to C33. (higher difficulty is better)
+Partial difficulty is important for maximum farm size, especially for C9 / C19 / C20 and C29 to C33 (higher difficulty is better).
 
 Solo farming roughly corresponds to a partial difficulty of 800k (800000).
 
