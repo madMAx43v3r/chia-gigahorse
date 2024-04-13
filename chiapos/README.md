@@ -92,6 +92,7 @@ The formula to convert total time for 1000 lookups to maximum farm size in TiB i
 ```
 max_farm_size_TiB = (plot_size_GiB / 1024) * plot_filter * 8 * 1000 / total_lookup_time_seconds;
 ```
+Newer `ProofOfSpace` versions will calculate this already and display at the end of the run.
 
 ## List of all Options
 
