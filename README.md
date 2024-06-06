@@ -192,7 +192,7 @@ To use the remote compute feature:
 - `CHIAPOS_RECOMPUTE_PORT` can be set to specify a custom default port for `chia_recompute_server` (default = 11989).
 - See `chia_recompute_server --help` for available options.
 
-To use the remote compute proxy:
+To use the remote compute proxy (optional):
 - Start `chia_recompute_proxy -n B -n C ...` on a machine `A`. (`B`, `C`, etc are running `chia_recompute_server`)
 - Set `CHIAPOS_RECOMPUTE_HOST` on your harvester(s) to machine A.
 - `chia_recompute_proxy` can be run on a central machine, or on each harvester itself, in which case `A = localhost`.
