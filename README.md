@@ -17,14 +17,15 @@ In the [release](https://github.com/madMAx43v3r/chia-gigahorse/releases) section
 The compressed plot harvester and farmer are not compatible with the official Chia Node, it only works together with the Gigahorse Node.
 However it's possible to use a wallet from the official Chia repository, instead of the Gigahorse binary wallet.
 
-Both NFT and OG plots are supported, as well as solo and pool farming (via the official pool protocol). Regular uncompressed plots are supported as well, so you can use the Gigahorse version while re-plotting your farm.
+Both NFT and OG plots are supported, as well as solo and pool farming (via the official pool protocol).
+Regular uncompressed plots and Bladebit plots are supported as well, so you can use Gigahorse while re-plotting your farm.
 
 The dev fee is as follows:
 - 3.125 % when using GPU(s) to farm compressed plots
 - 1.562 % when using CPU(s) to farm compressed plots
 - 0 % for regular uncompressed plots
 
-When you find a block there's a chance the 0.25 XCH farmer reward is used as fee, this is a random process. In case of CPU farming it's 1 out of 8 blocks on average, and for GPU farming it's 1 out of 4 blocks on average.
+When you find a block there's a chance the 0.125 XCH farmer reward is used as fee, this is a random process. In case of CPU farming it's 1 out of 8 blocks on average, and for GPU farming it's 1 out of 4 blocks on average.
 
 When the fee is paid from a block, you will see a log entry like this:
 ```
@@ -34,14 +35,9 @@ It will show the block height as well as the average fee that applies, depending
 
 ### Pool Partial Difficulty
 
-When farming NFT plots on a pool it is recommended to set the partial difficulty to 20 or more, otherwise your harvester will be overloaded with computing full proofs.
+When farming NFT plots on a pool it is recommended to set the partial difficulty to 100 or more, otherwise your harvester will be overloaded with computing full proofs.
 
-The chance of having to compute a full proof is roughly `1 / (2 * difficulty)`. The cost of computing a full proof is 8 (for C6+) or 16 (for C5 and lower) times that of a quality lookup.
-
-For example:
-- Difficulty 20 (at C6+): `8 / 40 = 20 %` compute overhead
-- Difficulty 100 (at C6+): `8 / 200 = 4 %` compute overhead
-- Difficulty 1000 (at C6+): `8 / 2000 = 0.4 %` compute overhead
+For GH 3.0 a much higher parital difficulty is required to achieve optimal performance, see the chart above for recommended settings.
 
 ### Plot Reload Interval
 
@@ -53,7 +49,29 @@ harvester:
 ```
 The default value of 120 sec will cause too much CPU load with large plot counts.
 
-### Usage Linux
+### GUI Usage
+
+Gigahorse now offers a full GUI package, by installing via `ChiaSetup-X.X.X.gigaX.exe` on Windows or installing `chia-blockchain_X.X.X.gigaX_amd64.deb` on Linux.
+
+This will over-write any existing Chia installation, but keeps your databse and all your settings and wallets. It works just like the official GUI but with GH support.
+
+![chia64x64](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/e5af9b48-18da-4235-ba66-b078a613c7b0)
+
+You will see this icon to signal that you're running GH and not official Chia.
+
+### CLI Usage Linux
+
+#### The new way with *.deb package install
+
+Usage with the `*.deb` package install is the same as with official Chia.
+
+For example:
+```
+chia stop all -d
+chia start farmer
+```
+
+#### The old way with *.tar.gz install
 
 Make sure to close any other instances first:
 ```
@@ -76,7 +94,19 @@ Note the usage of `./chia.bin ...` instead of just `chia ...`, this is the only 
 
 Alternatively, you can `. ./activate.sh` in `chia-gigahorse-farmer` to be able to use `chia ...` commands instead of `./chia.bin ...`.
 
-### Usage Windows
+### CLI Usage Windows
+
+#### The new way with ChiaSetup-*.exe install
+
+Usage with the `ChiaSetup-*.exe` install is the same as with official Chia.
+
+For example:
+```
+chia stop all -d
+chia start farmer
+```
+
+#### The old way with *.tar.gz install
 
 Make sure to close any running Chia GUI first, otherwise you cannot start the Gigahorse version.
 
@@ -94,27 +124,49 @@ chia wallet show
 chia stop all -d
 ```
 
-### Official GUI + Gigahorse
+#### Official GUI + Gigahorse
 
-You can start the official Chia GUI after starting Gigahorse in a terminal, however it needs to be the same version. It will still complain about version mismatch but when the base version (like `1.6.2`) is the same then it works.
+Note: Gigahorse now offers the GUI as well, but if you still want to use official GUI, see below.
+
+You can start the official Chia GUI after starting Gigahorse in a terminal, however it needs to be the same version.
+It will still complain about version mismatch but when the base version (like `1.6.2`) is the same then it works.
 
 When you close the GUI everything will be stopped, so you need to restart Gigahorse in the terminal again if so desired.
+Newer GUI versions allow to keep services running at exit though, if you select it.
 
-### Installation
+## Installation
 
-Note: There is no need to re-sync the blockchain, Gigahorse node will re-use your existing DB and config. Even the old v1 DB format still works.
+### Linux
 
-#### Linux
+Install dependency first:
 ```
 sudo apt install ocl-icd-libopencl1
+```
+
+The new way of using GH on Debian systems:
+```
+sudo dpkg -i ~/Downloads/chia-blockchain_X.X.X.gigaX_amd64.deb
+```
+Or if you don't need the GUI and use CLI only:
+```
+sudo dpkg -i ~/Downloads/chia-blockchain-cli_X.X.X.gigaX_amd64.deb
+```
+Alternatively, the old way of using GH:
+```
 tar xf chia-gigahorse-farmer-*.tar.gz
 ```
 
-#### Windows
+### Windows
 
-Just unzip the chia-gigahorse-farmer-*.zip somewhere.
+The new way of using GH:
+Install `ChiaSetup-X.X.X.gigaX.exe` and use the GUI or command line.
+
+The old way of using GH:
+Unzip the `chia-gigahorse-farmer-*.zip` somewhere.
 
 You might also have to install latest Microsoft Visual C++ Redistributable: https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+Note: There is no need to re-sync the blockchain, Gigahorse will re-use your existing database and config.
 
 ### Limit GPU / RAM usage
 
@@ -124,22 +176,9 @@ Please take a look at:
 
 Note: When changing environment variables you need to restart the Chia daemon for it to take effect: `./chia.bin stop all -d` or `chia.exe stop all -d`
 
-### RAM / VRAM requirements to farm
-
-![image](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/742fde23-cce2-4548-91ec-b22199fb435e)
-
-![image](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/a1fd6c50-711d-4b79-947a-76a32783ccec)
-
 When mixing different K size and C levels, only the higest RAM / VRAM requirement applies.
 
-## K33+
-
-![image](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/6bb34775-8e8b-480b-84f6-4bff49b46534)
-
-K33+ performance for the new C11 to C20 is considerably less than K32.
-In addition higher K size benefits more from a higher partial difficulty.
-
-### Remote Compute
+## Remote Compute
 
 It's possible to move the compute task to another machine or machines, in order to avoid having to install a GPU or powerful CPU in every harvester:
 
@@ -170,31 +209,31 @@ For example if you have a single compute server with 32 CPU cores, you should se
 The sum of `CHIAPOS_MAX_CORES` accross all harvesters should be greater or equal to the sum of CPU cores on all compute servers.
 In case of low number of harvesters (ie. 1-3) you should set `CHIAPOS_MAX_CORES` to the number of CPU cores on your compute server.
 
+### K33+
+
+![image](https://github.com/madMAx43v3r/chia-gigahorse/assets/951738/6bb34775-8e8b-480b-84f6-4bff49b46534)
+
+K33+ performance for C11 to C20 is considerably less than K32.
+In addition higher K size benefits more from a higher partial difficulty.
+GH 3.0 only supports K32.
+
 ### Known Issues
 
 - AMD GPU getting stuck in Linux, workaround is: `watch -n 0.1 sudo cat /sys/kernel/debug/dri/0/amdgpu_pm_info`
 
-### Fixed in latest version
+### Gigahorse GPU Plotter
 
-N / A
+You can find the GPU plotter binaries here: [cuda-plotter](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/cuda-plotter).
 
-## Gigahorse GPU Plotter
+### CPU Plotter (GH 1.0 and 2.0 only)
 
-You can find the GPU plotter binaries in [cuda-plotter](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/cuda-plotter).
+You can find the CPU plotter binaries here: [cpu-plotter](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/cpu-plotter).
 
-They support plotting for Chia as well as MMX.
-
-## CPU Plotter
-
-You can find the CPU plotter binaries in [cpu-plotter](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/cpu-plotter).
-
-They support plotting for Chia as well as MMX.
-
-## Farming Benchmark
+### Farming Benchmark
 
 To test how many plots you can farm on a given system you can use the `ProofOfSpace` tool in [chiapos](https://github.com/madMAx43v3r/chia-gigahorse/tree/master/chiapos).
 
-## Plot Sink
+### Plot Sink
 
 Plot Sink is a tool to receive plots over the network and copy them to multiple HDDs in parallel.
 
@@ -202,13 +241,13 @@ You can find binaries in [plot-sink](https://github.com/madMAx43v3r/chia-gigahor
 
 See also the open source repository: https://github.com/madMAx43v3r/chia-plot-sink
 
-## Docker Usage
+### Docker Usage
 
 The Dockerfile file uses multiple build stages to support 4 different applications CPU-Only, NVIDIA-GPU, Intel-GPU, and AMD-GPU.
 
 It is highly recommended to run the container with the `/root/.chia/mainnet` directory mapped to a local volume for persistant storage of the database and config files
 
-### CPU-Only
+#### CPU-Only
 
 Docker Run Example:
 
@@ -241,7 +280,7 @@ services:
 ### Remote compute server
 #      CHIAPOS_RECOMPUTE_HOST: 192.168.1.12   
 ```
-### NVIDIA-GPU
+#### NVIDIA-GPU
 
 Docker Run Example:
 
@@ -279,7 +318,7 @@ services:
 ```
 Note: for nvidia you also need the `NVIDIA Container Toolkit` installed on the host, for more info please see: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
 
-### Intel-GPU
+#### Intel-GPU
 
 Docker Run Example:
 
@@ -318,7 +357,7 @@ services:
 ```
 Note: for ARC GPU's you will need to be running kernel 6.2+ on your docker host
 
-### AMD-GPU
+#### AMD-GPU
 
 Docker Run Example:
 
@@ -357,7 +396,7 @@ services:
 #      CHIAPOS_MAX_OPENCL_DEVICES: 0
 ```
 
-### Further Customization
+#### Further Customization
 
 You can modify the container options by uncommenting the relevent settings in the docker-compose example and changing them from the defaults.
 
