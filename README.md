@@ -140,7 +140,7 @@ Newer GUI versions allow to keep services running at exit though, if you select 
 
 Install dependency first:
 ```
-sudo apt install ocl-icd-libopencl1
+sudo apt install ocl-icd-libopencl1 xdg-utils
 ```
 
 The new way of using GH on Debian systems:
