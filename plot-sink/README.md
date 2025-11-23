@@ -32,8 +32,16 @@ You can use the `chia_plot_copy` tool to manually send plots to a plot sink as f
 
 ### Windows
 
-Windows PowerShell (and Command Prompt) doesn't expand wildcards like a typical shell, so you have to jump through an extra hoop to expand any wildcard(s) before calling the program:
+Windows Command Prompt doesn't expand wildcards like a typical shell, so you have to jump through an extra hoop to expand any wildcard(s) before calling the program:
 
 ```
 .\chia_plot_copy.exe -d -t <IP/HOST> -- $(Resolve-Path -Path "my\path\plot-*")
 ```
+If it still doesn't work, try Windows PowerShell (run as admin) instead.
+
+For example:
+
+```
+.\chia_plot_copy.exe -d -t 192.168.1.107 -- $(Resolve-Path -Path "F:\*.plot")
+```
+
